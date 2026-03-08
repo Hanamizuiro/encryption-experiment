@@ -1,0 +1,137 @@
+\subsection{Gaussian Elimination with Partial Pivoting}
+\textbf{Source:} project pseudocode handout \cite{numerical-analysis-fco-2}.
+
+\begin{lstlisting}
+INPUT: n, augmented matrix A = [a_ij], 1 <= i <= n, 1 <= j <= n+1
+OUTPUT: x_1, ..., x_n or "no unique solution"
+
+Step 1: For i = 1 to n set NROW(i) = i.
+
+Step 2: For i = 1 to n-1 do:
+  Step 3: Choose p with i <= p <= n such that
+          |a(NROW(p), i)| = max_{i <= j <= n} |a(NROW(j), i)|.
+  Step 4: If a(NROW(p), i) = 0, stop with "no unique solution".
+  Step 5: If NROW(i) != NROW(p), interchange NROW(i) and NROW(p).
+  Step 6: For j = i+1 to n do:
+    Step 7: Set m(NROW(j), i) = a(NROW(j), i) / a(NROW(i), i).
+    Step 8: Apply
+            E_{NROW(j)} - m(NROW(j), i) E_{NROW(i)} -> E_{NROW(j)}.
+
+Step 9:  If a(NROW(n), n) = 0, stop with "no unique solution".
+Step 10: Set x_n = a(NROW(n), n+1) / a(NROW(n), n).
+Step 11: For i = n-1 down to 1 set
+         x_i = (a(NROW(i), n+1) - sum_{j=i+1}^{n} a(NROW(i), j) x_j)
+               / a(NROW(i), i).
+Step 12: Output x_1, ..., x_n.
+\end{lstlisting}
+
+\subsection{LU Decomposition (Doolittle Method)}
+\textbf{Source:} project pseudocode handout \cite{numerical-analysis-fco-2}; supporting LU notes \cite{lu-notes}.
+
+\begin{lstlisting}
+Phase 1: LU decomposition in place
+for k = 1 to n-1
+  for i = k+1 to n
+    a(i, k) = a(i, k) / a(k, k)
+    for j = k+1 to n
+      a(i, j) = a(i, j) - a(i, k) * a(k, j)
+    end
+  end
+end
+
+Phase 2: Forward substitution, solve L d = b
+x(1) = b(1)
+for i = 2 to n
+  s = 0
+  for j = 1 to i-1
+    s = s + a(i, j) * x(j)
+  end
+  x(i) = b(i) - s
+end
+
+Phase 3: Back substitution, solve U x = d
+x(n) = x(n) / a(n, n)
+for i = n-1 down to 1
+  s = 0
+  for j = i+1 to n
+    s = s + a(i, j) * x(j)
+  end
+  x(i) = (x(i) - s) / a(i, i)
+end
+\end{lstlisting}
+
+\subsection{Gauss-Seidel with Relaxation (SOR)}
+\textbf{Source:} project pseudocode handout \cite{numerical-analysis-fco-2}; stopping-rule presentation aligned with Chapra and Canale \cite{chapra-canale-2010}.
+
+\begin{lstlisting}
+SUBROUTINE Gseid(a, b, n, x, imax, es, lambda)
+
+Step 1: Normalization
+for i = 1 to n
+  dummy = a(i, i)
+  for j = 1 to n
+    a(i, j) = a(i, j) / dummy
+  end
+  b(i) = b(i) / dummy
+end
+
+Step 2: Initial guess
+for i = 1 to n
+  sum = b(i)
+  for j = 1 to n
+    if i != j then
+      sum = sum - a(i, j) * x(j)
+    end
+  end
+  x(i) = sum
+end
+
+Step 3: Iterative refinement
+iter = 1
+do
+  sentinel = 1
+  for i = 1 to n
+    old = x(i)
+    sum = b(i)
+    for j = 1 to n
+      if i != j then
+        sum = sum - a(i, j) * x(j)
+      end
+    end
+    x(i) = lambda * sum + (1 - lambda) * old
+    if sentinel == 1 and x(i) != 0 then
+      ea = abs((x(i) - old) / x(i)) * 100
+      if ea > es then
+        sentinel = 0
+      end
+    end
+  end
+  iter = iter + 1
+  if sentinel == 1 or iter > imax then
+    exit
+  end
+end
+\end{lstlisting}
+
+\subsection{GMRES Hybrid}
+\textbf{Source:} project pseudocode handout \cite{numerical-analysis-fco-2}; original hybrid GMRES reference \cite{nachtigal-gmres-1992}.
+
+\begin{lstlisting}
+INPUT: key matrix A, encrypted block b, tolerance epsilon, cost factor delta
+OUTPUT: decrypted image block x
+
+Phase I: GMRES acquisition
+1. Initialize x_0 and compute r_0 = b - A x_0.
+2. While nu + 3 + delta < (1 + delta) (log epsilon / log tau - 1) do:
+   a. Perform an Arnoldi step to expand the Krylov subspace.
+   b. Update the residual reduction factor tau = ||r_nu|| / ||r_0||.
+   c. Store coefficients of the implicit residual polynomial p_nu(z).
+
+Phase II: Stabilized Richardson iteration
+3. Compute roots zeta_1, ..., zeta_nu of p_nu(z).
+4. Order the roots with a weighted Leja sequence for numerical stability.
+5. While ||r_n|| > epsilon do:
+   a. Update x_j = x_{j-1} + r_{j-1} / zeta_j.
+   b. If the convergence rate falls below sqrt(tau), restart Phase I.
+6. Return x.
+\end{lstlisting}

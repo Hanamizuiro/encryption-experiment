@@ -1,0 +1,34 @@
+\begin{thebibliography}{1}
+
+\bibitem{chapra-canale-2010}
+Steven~C. Chapra and Raymond~P. Canale.
+\newblock {\em Numerical Methods for Engineers}.
+\newblock McGraw-Hill, 6 edition, 2010.
+
+\bibitem{kodak-lossless}
+{Eastman Kodak Company}.
+\newblock Kodak lossless true color image suite.
+\newblock \url{https://r0k.us/graphics/kodak/kodak/}, 1999.
+\newblock Accessed 2026-03-09.
+
+\bibitem{lu-notes}
+R.~Kiruba.
+\newblock Lu decomposition notes.
+\newblock
+  \url{https://www.cl.cam.ac.uk/teaching/1314/NumMethods/supporting/mcmaster-kiruba-ludecomp.pdf},
+  2014.
+\newblock University of Cambridge supporting notes, accessed 2026-03-09.
+
+\bibitem{nachtigal-gmres-1992}
+Noel~M. Nachtigal, Lothar Reichel, and Lloyd~N. Trefethen.
+\newblock A hybrid {GMRES} algorithm for nonsymmetric linear systems.
+\newblock {\em SIAM Journal on Matrix Analysis and Applications},
+  13(3):796--825, 1992.
+
+\bibitem{numerical-analysis-fco-2}
+{Numerical Analysis Project Source}.
+\newblock Numerical analysis\_fco\_2 project pseudocode handout, 2026.
+\newblock Course PDF supplied with the project workspace as \texttt{Numerical
+  Analysis\_FCO\_2.pdf}.
+
+\end{thebibliography}
