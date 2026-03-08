@@ -1,0 +1,301 @@
+{
+  "timestamp_utc": "2026-03-08T14:56:40.605349+00:00",
+  "project_root": "e:\\Projects\\Numerical-Analysis-Project",
+  "git_hash": "64b46be",
+  "data_source": "benchmark",
+  "benchmark_datasets": [
+    "kodak"
+  ],
+  "image_count": 24,
+  "image_names": [
+    "kodak_kodim01",
+    "kodak_kodim02",
+    "kodak_kodim03",
+    "kodak_kodim04",
+    "kodak_kodim05",
+    "kodak_kodim06",
+    "kodak_kodim07",
+    "kodak_kodim08",
+    "kodak_kodim09",
+    "kodak_kodim10",
+    "kodak_kodim11",
+    "kodak_kodim12",
+    "kodak_kodim13",
+    "kodak_kodim14",
+    "kodak_kodim15",
+    "kodak_kodim16",
+    "kodak_kodim17",
+    "kodak_kodim18",
+    "kodak_kodim19",
+    "kodak_kodim20",
+    "kodak_kodim21",
+    "kodak_kodim22",
+    "kodak_kodim23",
+    "kodak_kodim24"
+  ],
+  "image_size": [
+    128,
+    128
+  ],
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python_version": "3.13.7",
+  "dataset_records": [
+    {
+      "dataset": "kodak",
+      "subset": "kodim",
+      "file_id": "kodim01.png",
+      "label": "kodak_kodim01",
+      "local_path": "e:\\Projects\\Numerical-Analysis-Project\\data\\benchmarks\\kodak\\kodim01.png",
+      "height": 128,
+      "width": 128
+    },
+    {
+      "dataset": "kodak",
+      "subset": "kodim",
+      "file_id": "kodim02.png",
+      "label": "kodak_kodim02",
+      "local_path": "e:\\Projects\\Numerical-Analysis-Project\\data\\benchmarks\\kodak\\kodim02.png",
+      "height": 128,
+      "width": 128
+    },
+    {
+      "dataset": "kodak",
+      "subset": "kodim",
+      "file_id": "kodim03.png",
+      "label": "kodak_kodim03",
+      "local_path": "e:\\Projects\\Numerical-Analysis-Project\\data\\benchmarks\\kodak\\kodim03.png",
+      "height": 128,
+      "width": 128
+    },
+    {
+      "dataset": "kodak",
+      "subset": "kodim",
+      "file_id": "kodim04.png",
+      "label": "kodak_kodim04",
+      "local_path": "e:\\Projects\\Numerical-Analysis-Project\\data\\benchmarks\\kodak\\kodim04.png",
+      "height": 128,
+      "width": 128
+    },
+    {
+      "dataset": "kodak",
+      "subset": "kodim",
+      "file_id": "kodim05.png",
+      "label": "kodak_kodim05",
+      "local_path": "e:\\Projects\\Numerical-Analysis-Project\\data\\benchmarks\\kodak\\kodim05.png",
+      "height": 128,
+      "width": 128
+    },
+    {
+      "dataset": "kodak",
+      "subset": "kodim",
+      "file_id": "kodim06.png",
+      "label": "kodak_kodim06",
+      "local_path": "e:\\Projects\\Numerical-Analysis-Project\\data\\benchmarks\\kodak\\kodim06.png",
+      "height": 128,
+      "width": 128
+    },
+    {
+      "dataset": "kodak",
+      "subset": "kodim",
+      "file_id": "kodim07.png",
+      "label": "kodak_kodim07",
+      "local_path": "e:\\Projects\\Numerical-Analysis-Project\\data\\benchmarks\\kodak\\kodim07.png",
+      "height": 128,
+      "width": 128
+    },
+    {
+      "dataset": "kodak",
+      "subset": "kodim",
+      "file_id": "kodim08.png",
+      "label": "kodak_kodim08",
+      "local_path": "e:\\Projects\\Numerical-Analysis-Project\\data\\benchmarks\\kodak\\kodim08.png",
+      "height": 128,
+      "width": 128
+    },
+    {
+      "dataset": "kodak",
+      "subset": "kodim",
+      "file_id": "kodim09.png",
+      "label": "kodak_kodim09",
+      "local_path": "e:\\Projects\\Numerical-Analysis-Project\\data\\benchmarks\\kodak\\kodim09.png",
+      "height": 128,
+      "width": 128
+    },
+    {
+      "dataset": "kodak",
+      "subset": "kodim",
+      "file_id": "kodim10.png",
+      "label": "kodak_kodim10",
+      "local_path": "e:\\Projects\\Numerical-Analysis-Project\\data\\benchmarks\\kodak\\kodim10.png",
+      "height": 128,
+      "width": 128
+    },
+    {
+      "dataset": "kodak",
+      "subset": "kodim",
+      "file_id": "kodim11.png",
+      "label": "kodak_kodim11",
+      "local_path": "e:\\Projects\\Numerical-Analysis-Project\\data\\benchmarks\\kodak\\kodim11.png",
+      "height": 128,
+      "width": 128
+    },
+    {
+      "dataset": "kodak",
+      "subset": "kodim",
+      "file_id": "kodim12.png",
+      "label": "kodak_kodim12",
+      "local_path": "e:\\Projects\\Numerical-Analysis-Project\\data\\benchmarks\\kodak\\kodim12.png",
+      "height": 128,
+      "width": 128
+    },
+    {
+      "dataset": "kodak",
+      "subset": "kodim",
+      "file_id": "kodim13.png",
+      "label": "kodak_kodim13",
+      "local_path": "e:\\Projects\\Numerical-Analysis-Project\\data\\benchmarks\\kodak\\kodim13.png",
+      "height": 128,
+      "width": 128
+    },
+    {
+      "dataset": "kodak",
+      "subset": "kodim",
+      "file_id": "kodim14.png",
+      "label": "kodak_kodim14",
+      "local_path": "e:\\Projects\\Numerical-Analysis-Project\\data\\benchmarks\\kodak\\kodim14.png",
+      "height": 128,
+      "width": 128
+    },
+    {
+      "dataset": "kodak",
+      "subset": "kodim",
+      "file_id": "kodim15.png",
+      "label": "kodak_kodim15",
+      "local_path": "e:\\Projects\\Numerical-Analysis-Project\\data\\benchmarks\\kodak\\kodim15.png",
+      "height": 128,
+      "width": 128
+    },
+    {
+      "dataset": "kodak",
+      "subset": "kodim",
+      "file_id": "kodim16.png",
+      "label": "kodak_kodim16",
+      "local_path": "e:\\Projects\\Numerical-Analysis-Project\\data\\benchmarks\\kodak\\kodim16.png",
+      "height": 128,
+      "width": 128
+    },
+    {
+      "dataset": "kodak",
+      "subset": "kodim",
+      "file_id": "kodim17.png",
+      "label": "kodak_kodim17",
+      "local_path": "e:\\Projects\\Numerical-Analysis-Project\\data\\benchmarks\\kodak\\kodim17.png",
+      "height": 128,
+      "width": 128
+    },
+    {
+      "dataset": "kodak",
+      "subset": "kodim",
+      "file_id": "kodim18.png",
+      "label": "kodak_kodim18",
+      "local_path": "e:\\Projects\\Numerical-Analysis-Project\\data\\benchmarks\\kodak\\kodim18.png",
+      "height": 128,
+      "width": 128
+    },
+    {
+      "dataset": "kodak",
+      "subset": "kodim",
+      "file_id": "kodim19.png",
+      "label": "kodak_kodim19",
+      "local_path": "e:\\Projects\\Numerical-Analysis-Project\\data\\benchmarks\\kodak\\kodim19.png",
+      "height": 128,
+      "width": 128
+    },
+    {
+      "dataset": "kodak",
+      "subset": "kodim",
+      "file_id": "kodim20.png",
+      "label": "kodak_kodim20",
+      "local_path": "e:\\Projects\\Numerical-Analysis-Project\\data\\benchmarks\\kodak\\kodim20.png",
+      "height": 128,
+      "width": 128
+    },
+    {
+      "dataset": "kodak",
+      "subset": "kodim",
+      "file_id": "kodim21.png",
+      "label": "kodak_kodim21",
+      "local_path": "e:\\Projects\\Numerical-Analysis-Project\\data\\benchmarks\\kodak\\kodim21.png",
+      "height": 128,
+      "width": 128
+    },
+    {
+      "dataset": "kodak",
+      "subset": "kodim",
+      "file_id": "kodim22.png",
+      "label": "kodak_kodim22",
+      "local_path": "e:\\Projects\\Numerical-Analysis-Project\\data\\benchmarks\\kodak\\kodim22.png",
+      "height": 128,
+      "width": 128
+    },
+    {
+      "dataset": "kodak",
+      "subset": "kodim",
+      "file_id": "kodim23.png",
+      "label": "kodak_kodim23",
+      "local_path": "e:\\Projects\\Numerical-Analysis-Project\\data\\benchmarks\\kodak\\kodim23.png",
+      "height": 128,
+      "width": 128
+    },
+    {
+      "dataset": "kodak",
+      "subset": "kodim",
+      "file_id": "kodim24.png",
+      "label": "kodak_kodim24",
+      "local_path": "e:\\Projects\\Numerical-Analysis-Project\\data\\benchmarks\\kodak\\kodim24.png",
+      "height": 128,
+      "width": 128
+    }
+  ],
+  "config": {
+    "seed": 42,
+    "data_source": "benchmark",
+    "benchmark_manifest": "data/benchmark_manifests/dataset_manifest.csv",
+    "benchmark_root": "data/benchmarks",
+    "benchmark_datasets": [
+      "kodak"
+    ],
+    "max_benchmark_images": 24,
+    "custom_image_dir": "data/custom_images",
+    "max_custom_images": 20,
+    "save_loaded_images": true,
+    "save_dataset_contact_sheet": true,
+    "image_size": 128,
+    "block_size": 8,
+    "num_synthetic_images": 12,
+    "noise_sigmas": [
+      0.0,
+      0.01,
+      0.03,
+      0.07,
+      0.12
+    ],
+    "repeats": 3,
+    "gs_tol": 1e-06,
+    "gs_max_iters": 200,
+    "gs_relaxation": 1.0,
+    "gmres_rtol": 1e-08,
+    "gmres_atol": 0.0,
+    "gmres_restart": 16,
+    "gmres_maxiter": 64,
+    "sparse_density": 0.2,
+    "dense_diag_boost": 24.0,
+    "sparse_diag_boost": 10.0,
+    "warmup_solver_once_per_call": true,
+    "convergence_trace_images_per_sigma": 1,
+    "sigma_for_latex_table": 0.01,
+    "wall_case_limit": 24,
+    "save_wall_error_maps": true,
+    "save_solver_ranking": true
+  }
+}

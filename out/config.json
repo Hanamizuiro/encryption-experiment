@@ -1,0 +1,41 @@
+{
+  "seed": 42,
+  "data_source": "benchmark",
+  "benchmark_manifest": "data/benchmark_manifests/dataset_manifest.csv",
+  "benchmark_root": "data/benchmarks",
+  "benchmark_datasets": [
+    "kodak"
+  ],
+  "max_benchmark_images": 24,
+  "custom_image_dir": "data/custom_images",
+  "max_custom_images": 20,
+  "save_loaded_images": true,
+  "save_dataset_contact_sheet": true,
+  "image_size": 128,
+  "block_size": 8,
+  "num_synthetic_images": 12,
+  "noise_sigmas": [
+    0.0,
+    0.01,
+    0.03,
+    0.07,
+    0.12
+  ],
+  "repeats": 3,
+  "gs_tol": 1e-06,
+  "gs_max_iters": 200,
+  "gs_relaxation": 1.0,
+  "gmres_rtol": 1e-08,
+  "gmres_atol": 0.0,
+  "gmres_restart": 16,
+  "gmres_maxiter": 64,
+  "sparse_density": 0.2,
+  "dense_diag_boost": 24.0,
+  "sparse_diag_boost": 10.0,
+  "warmup_solver_once_per_call": true,
+  "convergence_trace_images_per_sigma": 1,
+  "sigma_for_latex_table": 0.01,
+  "wall_case_limit": 24,
+  "save_wall_error_maps": true,
+  "save_solver_ranking": true
+}
