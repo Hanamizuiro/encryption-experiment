@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.10.31)  9 MAR 2026 01:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.10.31)  9 MAR 2026 10:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -433,6 +433,24 @@ File: listings.cfg 2024/09/23 1.10c listings configuration
 ))
 Package: listings 2024/09/23 1.10c (Carsten Heinz)
 
+(c:/texlive/2025/texmf-dist/tex/latex/placeins/placeins.sty
+Package: placeins 2005/04/18  v 2.2
+)
+(c:/texlive/2025/texmf-dist/tex/latex/setspace/setspace.sty
+Package: setspace 2022/12/04 v6.7b set line spacing
+)
+(c:/texlive/2025/texmf-dist/tex/latex/titlesec/titlesec.sty
+Package: titlesec 2025/01/04 v2.17 Sectioning titles
+\ttl@box=\box63
+\beforetitleunit=\skip57
+\aftertitleunit=\skip58
+\ttl@plus=\dimen268
+\ttl@minus=\dimen269
+\ttl@toksa=\toks37
+\titlewidth=\dimen270
+\titlewidthlast=\dimen271
+\titlewidthfirst=\dimen272
+)
 (c:/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count331
@@ -440,24 +458,24 @@ File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -496,16 +514,16 @@ LaTeX Font Info:    ... okay on input line 43.
 (c:/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count332
-\scratchdimen=\dimen268
-\scratchbox=\box63
+\scratchdimen=\dimen273
+\scratchbox=\box64
 \nofMPsegments=\count333
 \nofMParguments=\count334
-\everyMPshowfont=\toks37
+\everyMPshowfont=\toks38
 \MPscratchCnt=\count335
-\MPscratchDim=\dimen269
+\MPscratchDim=\dimen274
 \MPnumerator=\count336
 \makeMPintoPDFobject=\count337
-\everyMPtoPDFconversion=\toks38
+\everyMPtoPDFconversion=\toks39
 ) (c:/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -515,7 +533,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring OFF on input line 43.
+Package hyperref Info: Link coloring OFF on input line 58.
 
 (./main.out) (./main.out)
 \@outlinefile=\write3
@@ -525,233 +543,222 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \c@lstlisting=\count338
-LaTeX Font Info:    Trying to load font information for U+msa on input line 45.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 60.
 
 
 (c:/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 45.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 60.
 
 
 (c:/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<out/figures/kodak_contact_sheet.png, id=110, 1010.466pt x 687.5505pt>
-File: out/figures/kodak_contact_sheet.png Graphic file (type png)
-<use out/figures/kodak_contact_sheet.png>
-Package pdftex.def Info: out/figures/kodak_contact_sheet.png  used on input lin
-e 67.
-(pdftex.def)             Requested size: 460.35791pt x 313.24512pt.
-
 
 [1
 
 {c:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-(./out/tables/paper_kodak_manifest.tex)
-Overfull \hbox (4.06116pt too wide) in paragraph at lines 83--84
+
+[2{c:/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+
+[3]
+
+[4]
+
+[5]
+
+[6]
+
+[7]
+<out/figures/kodak_contact_sheet.png, id=203, 1010.466pt x 687.5505pt>
+File: out/figures/kodak_contact_sheet.png Graphic file (type png)
+<use out/figures/kodak_contact_sheet.png>
+Package pdftex.def Info: out/figures/kodak_contact_sheet.png  used on input lin
+e 229.
+(pdftex.def)             Requested size: 375.80544pt x 255.7116pt.
+
+
+[8]
+Overfull \hbox (4.06116pt too wide) in paragraph at lines 241--242
 \OT1/cmr/m/n/10.95 dataset con-tact sheets, solver met-ric graphs, Gauss-Seidel
  con-ver-gence plots, wall-of-decryption
  []
 
 
 
-[2 <./out/figures/kodak_contact_sheet.png>]
+[9 <./out/figures/kodak_contact_sheet.png>]
 
-[3{c:/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+[10] (./out/tables/paper_dense_primary.tex)
 
-[4] (./out/tables/paper_dense_primary.tex)
-(./out/tables/paper_sparse_primary.tex) (./out/tables/paper_overall_summary.tex
-) (./out/tables/paper_delta_vs_np_solve.tex)
-
-[5]
-<out/figures/metrics_dense.png, id=170, 1236.8025pt x 397.485pt>
+[11] (./out/tables/paper_sparse_primary.tex)
+(./out/tables/paper_overall_summary.tex)
+<out/figures/metrics_dense.png, id=242, 1236.8025pt x 397.485pt>
 File: out/figures/metrics_dense.png Graphic file (type png)
 <use out/figures/metrics_dense.png>
-Package pdftex.def Info: out/figures/metrics_dense.png  used on input line 173.
+Package pdftex.def Info: out/figures/metrics_dense.png  used on input line 320.
 
 (pdftex.def)             Requested size: 460.35791pt x 147.94658pt.
-<out/figures/metrics_sparse.png, id=171, 1236.8025pt x 397.485pt>
+<out/figures/metrics_sparse.png, id=243, 1236.8025pt x 397.485pt>
 File: out/figures/metrics_sparse.png Graphic file (type png)
 <use out/figures/metrics_sparse.png>
-Package pdftex.def Info: out/figures/metrics_sparse.png  used on input line 175
+Package pdftex.def Info: out/figures/metrics_sparse.png  used on input line 322
 .
 (pdftex.def)             Requested size: 460.35791pt x 147.94658pt.
-<out/figures/wall_01.png, id=172, 1381.3425pt x 276.2685pt>
+<out/figures/wall_01.png, id=244, 1381.3425pt x 276.2685pt>
 File: out/figures/wall_01.png Graphic file (type png)
 <use out/figures/wall_01.png>
-Package pdftex.def Info: out/figures/wall_01.png  used on input line 177.
+Package pdftex.def Info: out/figures/wall_01.png  used on input line 324.
 (pdftex.def)             Requested size: 460.35791pt x 92.071pt.
-
-
-[6 <./out/figures/metrics_dense.png> <./out/figures/metrics_sparse.png>]
-<out/figures/wall_err_01.png, id=182, 961.848pt x 282.8385pt>
+<out/figures/wall_err_01.png, id=245, 961.848pt x 282.8385pt>
 File: out/figures/wall_err_01.png Graphic file (type png)
 <use out/figures/wall_err_01.png>
-Package pdftex.def Info: out/figures/wall_err_01.png  used on input line 179.
+Package pdftex.def Info: out/figures/wall_err_01.png  used on input line 326.
 (pdftex.def)             Requested size: 460.35791pt x 135.3682pt.
-<out/figures/paper_triptych.png, id=183, 1111.644pt x 355.1085pt>
+<out/figures/paper_triptych.png, id=246, 1111.644pt x 355.1085pt>
 File: out/figures/paper_triptych.png Graphic file (type png)
 <use out/figures/paper_triptych.png>
-Package pdftex.def Info: out/figures/paper_triptych.png  used on input line 181
+Package pdftex.def Info: out/figures/paper_triptych.png  used on input line 328
 .
 (pdftex.def)             Requested size: 432.17375pt x 138.05286pt.
-<out/figures/gs_convergence_traces.png, id=184, 904.3605pt x 384.0165pt>
+<out/figures/gs_convergence_traces.png, id=247, 904.3605pt x 384.0165pt>
 File: out/figures/gs_convergence_traces.png Graphic file (type png)
 <use out/figures/gs_convergence_traces.png>
 Package pdftex.def Info: out/figures/gs_convergence_traces.png  used on input l
-ine 183.
+ine 330.
 (pdftex.def)             Requested size: 450.96797pt x 191.49213pt.
 
 
-[7 <./out/figures/wall_01.png> <./out/figures/wall_err_01.png> <./out/figures/p
-aper_triptych.png>]
+[12]
 
-[8 <./out/figures/gs_convergence_traces.png>]
+[13 <./out/figures/metrics_dense.png> <./out/figures/metrics_sparse.png> <./out
+/figures/wall_01.png>]
 
-[9] (./appendix_pseudocode.tex
+[14 <./out/figures/wall_err_01.png> <./out/figures/paper_triptych.png> <./out/f
+igures/gs_convergence_traces.png>]
 
-[10]
+[15] (./appendix_pseudocode.tex
 
-[11]) (./appendix_walls.tex
+[16]
+
+[17]
+
+[18]) (./appendix_walls.tex
 File: out/figures/wall_01.png Graphic file (type png)
 <use out/figures/wall_01.png>
 Package pdftex.def Info: out/figures/wall_01.png  used on input line 4.
 (pdftex.def)             Requested size: 460.35791pt x 92.071pt.
-<out/figures/wall_02.png, id=313, 1381.3425pt x 276.2685pt>
+<out/figures/wall_02.png, id=416, 1381.3425pt x 276.2685pt>
 File: out/figures/wall_02.png Graphic file (type png)
 <use out/figures/wall_02.png>
 Package pdftex.def Info: out/figures/wall_02.png  used on input line 4.
 (pdftex.def)             Requested size: 460.35791pt x 92.071pt.
-
-
-[12]
-<out/figures/wall_03.png, id=359, 1381.3425pt x 276.2685pt>
+<out/figures/wall_03.png, id=417, 1381.3425pt x 276.2685pt>
 File: out/figures/wall_03.png Graphic file (type png)
 <use out/figures/wall_03.png>
 Package pdftex.def Info: out/figures/wall_03.png  used on input line 4.
 (pdftex.def)             Requested size: 460.35791pt x 92.071pt.
-<out/figures/wall_04.png, id=360, 1381.3425pt x 276.2685pt>
+<out/figures/wall_04.png, id=418, 1381.3425pt x 276.2685pt>
 File: out/figures/wall_04.png Graphic file (type png)
 <use out/figures/wall_04.png>
 Package pdftex.def Info: out/figures/wall_04.png  used on input line 4.
 (pdftex.def)             Requested size: 460.35791pt x 92.071pt.
-<out/figures/wall_05.png, id=361, 1381.3425pt x 276.2685pt>
+<out/figures/wall_05.png, id=419, 1381.3425pt x 276.2685pt>
 File: out/figures/wall_05.png Graphic file (type png)
 <use out/figures/wall_05.png>
 Package pdftex.def Info: out/figures/wall_05.png  used on input line 4.
 (pdftex.def)             Requested size: 460.35791pt x 92.071pt.
-<out/figures/wall_06.png, id=362, 1381.3425pt x 276.2685pt>
+<out/figures/wall_06.png, id=420, 1381.3425pt x 276.2685pt>
 File: out/figures/wall_06.png Graphic file (type png)
 <use out/figures/wall_06.png>
 Package pdftex.def Info: out/figures/wall_06.png  used on input line 4.
 (pdftex.def)             Requested size: 460.35791pt x 92.071pt.
-
-
-[13 <./out/figures/wall_02.png> <./out/figures/wall_03.png> <./out/figures/wall
-_04.png>]
-<out/figures/wall_07.png, id=375, 1381.3425pt x 276.2685pt>
+<out/figures/wall_07.png, id=421, 1381.3425pt x 276.2685pt>
 File: out/figures/wall_07.png Graphic file (type png)
 <use out/figures/wall_07.png>
 Package pdftex.def Info: out/figures/wall_07.png  used on input line 4.
 (pdftex.def)             Requested size: 460.35791pt x 92.071pt.
-<out/figures/wall_08.png, id=376, 1381.3425pt x 276.2685pt>
+<out/figures/wall_08.png, id=422, 1381.3425pt x 276.2685pt>
 File: out/figures/wall_08.png Graphic file (type png)
 <use out/figures/wall_08.png>
 Package pdftex.def Info: out/figures/wall_08.png  used on input line 4.
 (pdftex.def)             Requested size: 460.35791pt x 92.071pt.
-<out/figures/wall_09.png, id=377, 1381.3425pt x 276.2685pt>
+<out/figures/wall_09.png, id=423, 1381.3425pt x 276.2685pt>
 File: out/figures/wall_09.png Graphic file (type png)
 <use out/figures/wall_09.png>
 Package pdftex.def Info: out/figures/wall_09.png  used on input line 4.
 (pdftex.def)             Requested size: 460.35791pt x 92.071pt.
-<out/figures/wall_10.png, id=378, 1381.3425pt x 276.2685pt>
+<out/figures/wall_10.png, id=424, 1381.3425pt x 276.2685pt>
 File: out/figures/wall_10.png Graphic file (type png)
 <use out/figures/wall_10.png>
 Package pdftex.def Info: out/figures/wall_10.png  used on input line 4.
 (pdftex.def)             Requested size: 460.35791pt x 92.071pt.
-
-
-[14 <./out/figures/wall_05.png> <./out/figures/wall_06.png> <./out/figures/wall
-_07.png> <./out/figures/wall_08.png>]
-<out/figures/wall_11.png, id=391, 1381.3425pt x 276.2685pt>
+<out/figures/wall_11.png, id=425, 1381.3425pt x 276.2685pt>
 File: out/figures/wall_11.png Graphic file (type png)
 <use out/figures/wall_11.png>
 Package pdftex.def Info: out/figures/wall_11.png  used on input line 4.
 (pdftex.def)             Requested size: 460.35791pt x 92.071pt.
-<out/figures/wall_12.png, id=392, 1381.3425pt x 276.2685pt>
+<out/figures/wall_12.png, id=426, 1381.3425pt x 276.2685pt>
 File: out/figures/wall_12.png Graphic file (type png)
 <use out/figures/wall_12.png>
 Package pdftex.def Info: out/figures/wall_12.png  used on input line 4.
 (pdftex.def)             Requested size: 460.35791pt x 92.071pt.
-<out/figures/wall_13.png, id=393, 1381.3425pt x 276.2685pt>
+<out/figures/wall_13.png, id=427, 1381.3425pt x 276.2685pt>
 File: out/figures/wall_13.png Graphic file (type png)
 <use out/figures/wall_13.png>
 Package pdftex.def Info: out/figures/wall_13.png  used on input line 4.
 (pdftex.def)             Requested size: 460.35791pt x 92.071pt.
-<out/figures/wall_14.png, id=394, 1381.3425pt x 276.2685pt>
+<out/figures/wall_14.png, id=428, 1381.3425pt x 276.2685pt>
 File: out/figures/wall_14.png Graphic file (type png)
 <use out/figures/wall_14.png>
 Package pdftex.def Info: out/figures/wall_14.png  used on input line 4.
 (pdftex.def)             Requested size: 460.35791pt x 92.071pt.
-
-
-[15 <./out/figures/wall_09.png> <./out/figures/wall_10.png> <./out/figures/wall
-_11.png> <./out/figures/wall_12.png>]
-<out/figures/wall_15.png, id=408, 1381.3425pt x 276.2685pt>
+<out/figures/wall_15.png, id=429, 1381.3425pt x 276.2685pt>
 File: out/figures/wall_15.png Graphic file (type png)
 <use out/figures/wall_15.png>
 Package pdftex.def Info: out/figures/wall_15.png  used on input line 4.
 (pdftex.def)             Requested size: 460.35791pt x 92.071pt.
-<out/figures/wall_16.png, id=409, 1381.3425pt x 276.2685pt>
+<out/figures/wall_16.png, id=430, 1381.3425pt x 276.2685pt>
 File: out/figures/wall_16.png Graphic file (type png)
 <use out/figures/wall_16.png>
 Package pdftex.def Info: out/figures/wall_16.png  used on input line 4.
 (pdftex.def)             Requested size: 460.35791pt x 92.071pt.
-<out/figures/wall_17.png, id=410, 1381.3425pt x 276.2685pt>
+<out/figures/wall_17.png, id=431, 1381.3425pt x 276.2685pt>
 File: out/figures/wall_17.png Graphic file (type png)
 <use out/figures/wall_17.png>
 Package pdftex.def Info: out/figures/wall_17.png  used on input line 4.
 (pdftex.def)             Requested size: 460.35791pt x 92.071pt.
-<out/figures/wall_18.png, id=411, 1381.3425pt x 276.2685pt>
+<out/figures/wall_18.png, id=432, 1381.3425pt x 276.2685pt>
 File: out/figures/wall_18.png Graphic file (type png)
 <use out/figures/wall_18.png>
 Package pdftex.def Info: out/figures/wall_18.png  used on input line 4.
 (pdftex.def)             Requested size: 460.35791pt x 92.071pt.
-
-
-[16 <./out/figures/wall_13.png> <./out/figures/wall_14.png> <./out/figures/wall
-_15.png> <./out/figures/wall_16.png>]
-<out/figures/wall_19.png, id=424, 1381.3425pt x 276.2685pt>
+<out/figures/wall_19.png, id=433, 1381.3425pt x 276.2685pt>
 File: out/figures/wall_19.png Graphic file (type png)
 <use out/figures/wall_19.png>
 Package pdftex.def Info: out/figures/wall_19.png  used on input line 4.
 (pdftex.def)             Requested size: 460.35791pt x 92.071pt.
-<out/figures/wall_20.png, id=425, 1381.3425pt x 276.2685pt>
+<out/figures/wall_20.png, id=434, 1381.3425pt x 276.2685pt>
 File: out/figures/wall_20.png Graphic file (type png)
 <use out/figures/wall_20.png>
 Package pdftex.def Info: out/figures/wall_20.png  used on input line 4.
 (pdftex.def)             Requested size: 460.35791pt x 92.071pt.
-<out/figures/wall_21.png, id=426, 1381.3425pt x 276.2685pt>
+<out/figures/wall_21.png, id=435, 1381.3425pt x 276.2685pt>
 File: out/figures/wall_21.png Graphic file (type png)
 <use out/figures/wall_21.png>
 Package pdftex.def Info: out/figures/wall_21.png  used on input line 4.
 (pdftex.def)             Requested size: 460.35791pt x 92.071pt.
-<out/figures/wall_22.png, id=427, 1381.3425pt x 276.2685pt>
+<out/figures/wall_22.png, id=436, 1381.3425pt x 276.2685pt>
 File: out/figures/wall_22.png Graphic file (type png)
 <use out/figures/wall_22.png>
 Package pdftex.def Info: out/figures/wall_22.png  used on input line 4.
 (pdftex.def)             Requested size: 460.35791pt x 92.071pt.
-
-
-[17 <./out/figures/wall_17.png> <./out/figures/wall_18.png> <./out/figures/wall
-_19.png> <./out/figures/wall_20.png>]
-<out/figures/wall_23.png, id=440, 1381.3425pt x 276.2685pt>
+<out/figures/wall_23.png, id=437, 1381.3425pt x 276.2685pt>
 File: out/figures/wall_23.png Graphic file (type png)
 <use out/figures/wall_23.png>
 Package pdftex.def Info: out/figures/wall_23.png  used on input line 4.
 (pdftex.def)             Requested size: 460.35791pt x 92.071pt.
-<out/figures/wall_24.png, id=441, 1381.3425pt x 276.2685pt>
+<out/figures/wall_24.png, id=438, 1381.3425pt x 276.2685pt>
 File: out/figures/wall_24.png Graphic file (type png)
 <use out/figures/wall_24.png>
 Package pdftex.def Info: out/figures/wall_24.png  used on input line 4.
@@ -760,195 +767,196 @@ File: out/figures/wall_err_01.png Graphic file (type png)
 <use out/figures/wall_err_01.png>
 Package pdftex.def Info: out/figures/wall_err_01.png  used on input line 9.
 (pdftex.def)             Requested size: 432.17375pt x 127.08192pt.
-<out/figures/wall_err_02.png, id=442, 961.848pt x 282.8385pt>
+<out/figures/wall_err_02.png, id=439, 961.848pt x 282.8385pt>
 File: out/figures/wall_err_02.png Graphic file (type png)
 <use out/figures/wall_err_02.png>
 Package pdftex.def Info: out/figures/wall_err_02.png  used on input line 9.
 (pdftex.def)             Requested size: 432.17375pt x 127.08192pt.
-
-
-[18 <./out/figures/wall_21.png> <./out/figures/wall_22.png> <./out/figures/wall
-_23.png> <./out/figures/wall_24.png>]
-<out/figures/wall_err_03.png, id=455, 961.848pt x 282.8385pt>
+<out/figures/wall_err_03.png, id=440, 961.848pt x 282.8385pt>
 File: out/figures/wall_err_03.png Graphic file (type png)
 <use out/figures/wall_err_03.png>
 Package pdftex.def Info: out/figures/wall_err_03.png  used on input line 9.
 (pdftex.def)             Requested size: 432.17375pt x 127.08192pt.
-<out/figures/wall_err_04.png, id=456, 961.848pt x 282.8385pt>
+<out/figures/wall_err_04.png, id=441, 961.848pt x 282.8385pt>
 File: out/figures/wall_err_04.png Graphic file (type png)
 <use out/figures/wall_err_04.png>
 Package pdftex.def Info: out/figures/wall_err_04.png  used on input line 9.
 (pdftex.def)             Requested size: 432.17375pt x 127.08192pt.
-<out/figures/wall_err_05.png, id=457, 961.848pt x 282.8385pt>
+<out/figures/wall_err_05.png, id=442, 961.848pt x 282.8385pt>
 File: out/figures/wall_err_05.png Graphic file (type png)
 <use out/figures/wall_err_05.png>
 Package pdftex.def Info: out/figures/wall_err_05.png  used on input line 9.
 (pdftex.def)             Requested size: 432.17375pt x 127.08192pt.
-
-
-[19 <./out/figures/wall_err_02.png> <./out/figures/wall_err_03.png>]
-<out/figures/wall_err_06.png, id=468, 961.848pt x 282.8385pt>
+<out/figures/wall_err_06.png, id=443, 961.848pt x 282.8385pt>
 File: out/figures/wall_err_06.png Graphic file (type png)
 <use out/figures/wall_err_06.png>
 Package pdftex.def Info: out/figures/wall_err_06.png  used on input line 9.
 (pdftex.def)             Requested size: 432.17375pt x 127.08192pt.
-<out/figures/wall_err_07.png, id=469, 961.848pt x 282.8385pt>
+<out/figures/wall_err_07.png, id=444, 961.848pt x 282.8385pt>
 File: out/figures/wall_err_07.png Graphic file (type png)
 <use out/figures/wall_err_07.png>
 Package pdftex.def Info: out/figures/wall_err_07.png  used on input line 9.
 (pdftex.def)             Requested size: 432.17375pt x 127.08192pt.
-<out/figures/wall_err_08.png, id=470, 961.848pt x 282.8385pt>
+<out/figures/wall_err_08.png, id=445, 961.848pt x 282.8385pt>
 File: out/figures/wall_err_08.png Graphic file (type png)
 <use out/figures/wall_err_08.png>
 Package pdftex.def Info: out/figures/wall_err_08.png  used on input line 9.
 (pdftex.def)             Requested size: 432.17375pt x 127.08192pt.
-
-
-[20 <./out/figures/wall_err_04.png> <./out/figures/wall_err_05.png> <./out/figu
-res/wall_err_06.png>]
-<out/figures/wall_err_09.png, id=481, 961.848pt x 282.8385pt>
+<out/figures/wall_err_09.png, id=446, 961.848pt x 282.8385pt>
 File: out/figures/wall_err_09.png Graphic file (type png)
 <use out/figures/wall_err_09.png>
 Package pdftex.def Info: out/figures/wall_err_09.png  used on input line 9.
 (pdftex.def)             Requested size: 432.17375pt x 127.08192pt.
-<out/figures/wall_err_10.png, id=482, 961.848pt x 282.8385pt>
+<out/figures/wall_err_10.png, id=447, 961.848pt x 282.8385pt>
 File: out/figures/wall_err_10.png Graphic file (type png)
 <use out/figures/wall_err_10.png>
 Package pdftex.def Info: out/figures/wall_err_10.png  used on input line 9.
 (pdftex.def)             Requested size: 432.17375pt x 127.08192pt.
-<out/figures/wall_err_11.png, id=483, 961.848pt x 282.8385pt>
+<out/figures/wall_err_11.png, id=448, 961.848pt x 282.8385pt>
 File: out/figures/wall_err_11.png Graphic file (type png)
 <use out/figures/wall_err_11.png>
 Package pdftex.def Info: out/figures/wall_err_11.png  used on input line 9.
 (pdftex.def)             Requested size: 432.17375pt x 127.08192pt.
-
-
-[21 <./out/figures/wall_err_07.png> <./out/figures/wall_err_08.png> <./out/figu
-res/wall_err_09.png>]
-<out/figures/wall_err_12.png, id=494, 961.848pt x 282.8385pt>
+<out/figures/wall_err_12.png, id=449, 961.848pt x 282.8385pt>
 File: out/figures/wall_err_12.png Graphic file (type png)
 <use out/figures/wall_err_12.png>
 Package pdftex.def Info: out/figures/wall_err_12.png  used on input line 9.
 (pdftex.def)             Requested size: 432.17375pt x 127.08192pt.
-<out/figures/wall_err_13.png, id=495, 961.848pt x 282.8385pt>
+<out/figures/wall_err_13.png, id=450, 961.848pt x 282.8385pt>
 File: out/figures/wall_err_13.png Graphic file (type png)
 <use out/figures/wall_err_13.png>
 Package pdftex.def Info: out/figures/wall_err_13.png  used on input line 9.
 (pdftex.def)             Requested size: 432.17375pt x 127.08192pt.
-<out/figures/wall_err_14.png, id=496, 961.848pt x 282.8385pt>
+<out/figures/wall_err_14.png, id=451, 961.848pt x 282.8385pt>
 File: out/figures/wall_err_14.png Graphic file (type png)
 <use out/figures/wall_err_14.png>
 Package pdftex.def Info: out/figures/wall_err_14.png  used on input line 9.
 (pdftex.def)             Requested size: 432.17375pt x 127.08192pt.
-
-
-[22 <./out/figures/wall_err_10.png> <./out/figures/wall_err_11.png> <./out/figu
-res/wall_err_12.png>]
-<out/figures/wall_err_15.png, id=507, 961.848pt x 282.8385pt>
+<out/figures/wall_err_15.png, id=452, 961.848pt x 282.8385pt>
 File: out/figures/wall_err_15.png Graphic file (type png)
 <use out/figures/wall_err_15.png>
 Package pdftex.def Info: out/figures/wall_err_15.png  used on input line 9.
 (pdftex.def)             Requested size: 432.17375pt x 127.08192pt.
-<out/figures/wall_err_16.png, id=508, 961.848pt x 282.8385pt>
+<out/figures/wall_err_16.png, id=453, 961.848pt x 282.8385pt>
 File: out/figures/wall_err_16.png Graphic file (type png)
 <use out/figures/wall_err_16.png>
 Package pdftex.def Info: out/figures/wall_err_16.png  used on input line 9.
 (pdftex.def)             Requested size: 432.17375pt x 127.08192pt.
-<out/figures/wall_err_17.png, id=509, 961.848pt x 282.8385pt>
+<out/figures/wall_err_17.png, id=454, 961.848pt x 282.8385pt>
 File: out/figures/wall_err_17.png Graphic file (type png)
 <use out/figures/wall_err_17.png>
 Package pdftex.def Info: out/figures/wall_err_17.png  used on input line 9.
 (pdftex.def)             Requested size: 432.17375pt x 127.08192pt.
-
-
-[23 <./out/figures/wall_err_13.png> <./out/figures/wall_err_14.png> <./out/figu
-res/wall_err_15.png>]
-<out/figures/wall_err_18.png, id=520, 961.848pt x 282.8385pt>
+<out/figures/wall_err_18.png, id=455, 961.848pt x 282.8385pt>
 File: out/figures/wall_err_18.png Graphic file (type png)
 <use out/figures/wall_err_18.png>
 Package pdftex.def Info: out/figures/wall_err_18.png  used on input line 9.
 (pdftex.def)             Requested size: 432.17375pt x 127.08192pt.
-<out/figures/wall_err_19.png, id=521, 961.848pt x 282.8385pt>
+<out/figures/wall_err_19.png, id=456, 961.848pt x 282.8385pt>
 File: out/figures/wall_err_19.png Graphic file (type png)
 <use out/figures/wall_err_19.png>
 Package pdftex.def Info: out/figures/wall_err_19.png  used on input line 9.
 (pdftex.def)             Requested size: 432.17375pt x 127.08192pt.
-<out/figures/wall_err_20.png, id=522, 961.848pt x 282.8385pt>
+<out/figures/wall_err_20.png, id=457, 961.848pt x 282.8385pt>
 File: out/figures/wall_err_20.png Graphic file (type png)
 <use out/figures/wall_err_20.png>
 Package pdftex.def Info: out/figures/wall_err_20.png  used on input line 9.
 (pdftex.def)             Requested size: 432.17375pt x 127.08192pt.
-
-
-[24 <./out/figures/wall_err_16.png> <./out/figures/wall_err_17.png> <./out/figu
-res/wall_err_18.png>]
-<out/figures/wall_err_21.png, id=533, 961.848pt x 282.8385pt>
+<out/figures/wall_err_21.png, id=458, 961.848pt x 282.8385pt>
 File: out/figures/wall_err_21.png Graphic file (type png)
 <use out/figures/wall_err_21.png>
 Package pdftex.def Info: out/figures/wall_err_21.png  used on input line 9.
 (pdftex.def)             Requested size: 432.17375pt x 127.08192pt.
-<out/figures/wall_err_22.png, id=534, 961.848pt x 282.8385pt>
+<out/figures/wall_err_22.png, id=459, 961.848pt x 282.8385pt>
 File: out/figures/wall_err_22.png Graphic file (type png)
 <use out/figures/wall_err_22.png>
 Package pdftex.def Info: out/figures/wall_err_22.png  used on input line 9.
 (pdftex.def)             Requested size: 432.17375pt x 127.08192pt.
-<out/figures/wall_err_23.png, id=535, 961.848pt x 282.8385pt>
+<out/figures/wall_err_23.png, id=460, 961.848pt x 282.8385pt>
 File: out/figures/wall_err_23.png Graphic file (type png)
 <use out/figures/wall_err_23.png>
 Package pdftex.def Info: out/figures/wall_err_23.png  used on input line 9.
 (pdftex.def)             Requested size: 432.17375pt x 127.08192pt.
-
-
-[25 <./out/figures/wall_err_19.png> <./out/figures/wall_err_20.png> <./out/figu
-res/wall_err_21.png>]
-<out/figures/wall_err_24.png, id=547, 961.848pt x 282.8385pt>
+<out/figures/wall_err_24.png, id=461, 961.848pt x 282.8385pt>
 File: out/figures/wall_err_24.png Graphic file (type png)
 <use out/figures/wall_err_24.png>
 Package pdftex.def Info: out/figures/wall_err_24.png  used on input line 9.
 (pdftex.def)             Requested size: 432.17375pt x 127.08192pt.
 ) (./main.bbl
-Underfull \hbox (badness 2980) in paragraph at lines 15--21
+
+[19 <./out/figures/wall_02.png> <./out/figures/wall_03.png>]
+
+[20 <./out/figures/wall_04.png> <./out/figures/wall_05.png> <./out/figures/wall
+_06.png> <./out/figures/wall_07.png> <./out/figures/wall_08.png>]
+
+[21 <./out/figures/wall_09.png> <./out/figures/wall_10.png> <./out/figures/wall
+_11.png> <./out/figures/wall_12.png> <./out/figures/wall_13.png>]
+
+[22 <./out/figures/wall_14.png> <./out/figures/wall_15.png> <./out/figures/wall
+_16.png> <./out/figures/wall_17.png> <./out/figures/wall_18.png>]
+
+[23 <./out/figures/wall_19.png> <./out/figures/wall_20.png> <./out/figures/wall
+_21.png> <./out/figures/wall_22.png> <./out/figures/wall_23.png>]
+
+[24 <./out/figures/wall_24.png> <./out/figures/wall_err_02.png> <./out/figures/
+wall_err_03.png>]
+
+[25 <./out/figures/wall_err_04.png> <./out/figures/wall_err_05.png> <./out/figu
+res/wall_err_06.png> <./out/figures/wall_err_07.png>]
+
+[26 <./out/figures/wall_err_08.png> <./out/figures/wall_err_09.png> <./out/figu
+res/wall_err_10.png> <./out/figures/wall_err_11.png>]
+
+[27 <./out/figures/wall_err_12.png> <./out/figures/wall_err_13.png> <./out/figu
+res/wall_err_14.png> <./out/figures/wall_err_15.png>]
+
+[28 <./out/figures/wall_err_16.png> <./out/figures/wall_err_17.png> <./out/figu
+res/wall_err_18.png> <./out/figures/wall_err_19.png>]
+
+[29 <./out/figures/wall_err_20.png> <./out/figures/wall_err_21.png> <./out/figu
+res/wall_err_22.png> <./out/figures/wall_err_23.png>]
+Underfull \hbox (badness 2119) in paragraph at lines 30--34
 []\OT1/cmr/m/n/10.95 R. Kiruba.  Lu de-com-po-si-tion notes.  []$\OT1/cmtt/m/n/
 10.95 https : / / www . cl . cam . ac . uk / teaching / 1314 /
  []
 
+)
 
-
-[26 <./out/figures/wall_err_22.png> <./out/figures/wall_err_23.png> <./out/figu
-res/wall_err_24.png>])
-
-[27] (./main.aux)
+[30 <./out/figures/wall_err_24.png>] (./main.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-10-24>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 866FE1FEC11EB12AA540098470CBE9DA;3768.
+(rerunfilecheck)             Checksum: AD4E896DB61942E841727643D163C2C9;5064.
  ) 
 Here is how much of TeX's memory you used:
- 19172 strings out of 467747
- 327870 string characters out of 5431120
- 1105055 words of memory out of 5000000
- 47366 multiletter control sequences out of 15000+600000
- 638463 words of font info for 82 fonts, out of 8000000 for 9000
+ 19558 strings out of 467747
+ 333436 string characters out of 5431120
+ 1064231 words of memory out of 5000000
+ 47735 multiletter control sequences out of 15000+600000
+ 639084 words of font info for 84 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,10n,79p,852b,1966s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,9n,79p,1349b,1964s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/tex
 live/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2025
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2025/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2025/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2025/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmr17.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmr8.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.
-pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/te
-xlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/202
-5/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2025/texmf-d
-ist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2025/texmf-dist/
-fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on main.pdf (27 pages, 7656549 bytes).
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2025/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2025/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2025/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmmi8.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12
+.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/t
+exlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2025
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2025/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2025/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmtt10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfon
+ts/symbols/msbm10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/s
+frm1095.pfb>
+Output written on main.pdf (30 pages, 7710073 bytes).
 PDF statistics:
- 682 PDF objects out of 1000 (max. 8388607)
- 515 compressed objects within 6 object streams
- 259 named destinations out of 1000 (max. 500000)
- 474 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 744 PDF objects out of 1000 (max. 8388607)
+ 568 compressed objects within 6 object streams
+ 268 named destinations out of 1000 (max. 500000)
+ 538 words of extra memory for PDF output out of 10000 (max. 10000000)
 

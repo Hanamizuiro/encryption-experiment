@@ -1,56 +1,21 @@
-# Numerical Analysis Project: Matrix-Based Image Encryption Solver Study
+<div align="center">
 
-A research-focused repository that benchmarks numerical solvers for matrix-based image encryption/decryption under noise, conditioning stress, and sparse/dense key settings.
+# Kodak-Based Benchmarking of Numerical Solvers for Matrix Image Decryption
 
-## Project Overview
+**A numerical-analysis study of noisy block-based image decryption using the 24-image Kodak benchmark**
 
-This project investigates a central numerical analysis question:
+| Dataset                        | Block Size | Solvers                                       | Deliverables                                     |
+| ------------------------------ | ---------- | --------------------------------------------- | ------------------------------------------------ |
+| Kodak lossless 24-image subset | 8 x 8      | Gaussian Elimination, LU, Gauss-Seidel, GMRES | Notebook artifacts, LaTeX paper, figures, tables |
 
-**When encrypted image reconstruction depends on solving linear systems, which solvers remain accurate, stable, and efficient as problem conditions become harder?**
+</div>
 
-Instead of treating encryption as a black box, the study explicitly measures solver behavior (quality, runtime, failure rate, and convergence) across controlled perturbations.
+## Overview
 
-## Research Scope
+This repository studies image decryption as a numerical linear algebra problem rather than a pure cryptography exercise. Each Kodak image is resized to 128 x 128, partitioned into 8 x 8 blocks, encrypted with matrix-based transforms, corrupted with additive Gaussian noise, and then reconstructed with four solvers.
 
-- Domain: numerical linear algebra for matrix-based image schemes.
-- Focus: solver robustness and reconstruction behavior.
-- Not in scope: formal modern-cryptography security proofs.
+The core question is: which numerical methods remain accurate, stable, and efficient when corruption is introduced into the encrypted image representation?
 
-## What This Repository Produces
+> [!IMPORTANT]
+> This project evaluates numerical solver behavior in a matrix-based image encryption workflow. It does not claim modern cryptographic security guarantees.
 
-From a single experimental pipeline, the repo generates:
-
-- Per-run and aggregate metrics (`CSV`)
-- Publication-ready plots (`PNG`)
-- LaTeX-ready tables (`.tex`)
-- Statistical comparison artifacts (paired tests + bootstrap CIs)
-- Conditioning vs. quality/failure diagnostics
-- Ablation results for factor-isolation analysis
-
-## Experimental Design Summary
-
-The notebook and scripts evaluate solvers over:
-
-- Dense and sparse key matrices
-- Multiple Gaussian noise levels
-- Repeated runs for timing/quality robustness
-- Benchmark image sets (Kodak + BSDS subset)
-- Baseline comparison against `np_solve`
-
-Primary outputs are interpreted through:
-
-- PSNR / MSE / runtime behavior
-- Solver ranking tables
-- Convergence traces (Gauss-Seidel)
-- Error-map summaries
-- Conditioning proxies (including `cond(K)` trends)
-
-## Reproducibility
-
-This repository is designed for team reproducibility with:
-
-- Fixed benchmark manifest
-- Strict benchmark file existence checks in notebook loading
-- Dependency pinning via `requirements.txt`
-- Thread pinning in pipeline wrapper for fairer timing conditions
-- Run metadata saved to `out/config.json` and `out/run_info.json`
