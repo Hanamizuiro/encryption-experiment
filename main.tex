@@ -13,6 +13,7 @@
 \usepackage{placeins}
 \usepackage{setspace}
 \usepackage{titlesec}
+\usepackage{hyperref}
 
 \titleformat{\paragraph}[block]{\normalfont\normalsize\bfseries}{}{0pt}{}
 
@@ -35,7 +36,7 @@
 \titlespacing*{\subsubsection}{0pt}{1.3em}{0.8em}
 \titlespacing*{\paragraph}{0pt}{1.1em}{0.5em}
 
-\title{Kodak-Based Benchmarking of Direct, Iterative, and Hybrid Solvers in Matrix Image Decryption}
+\title{Title}
 \author{Numerical Analysis Project}
 \date{March 9, 2026}
 
@@ -55,323 +56,336 @@
   }%
 }
 
+% Toggle to include the full appendix wall figures (large output).
+\newif\ifincludeappendixwalls
+\includeappendixwallstrue
+
 \begin{document}
 \maketitle
 
 \begin{abstract}
-This paper presents a numerical-analysis benchmark for block-based image decryption using the 24-image Kodak lossless benchmark set \cite{kodak-lossless}. Each image is resized to $128 \times 128$, partitioned into $8 \times 8$ blocks, encrypted with dense and sparse key matrices, corrupted with additive Gaussian noise, and then decrypted by Gaussian Elimination with partial pivoting, LU Decomposition, Gauss-Seidel with relaxation, and GMRES. The comparison focuses on numerical robustness, reconstruction quality, convergence behavior, and runtime under controlled perturbations. The results show that LU decomposition is the fastest method overall, with median solve times of about $244.71$ ms for dense keys and $246.03$ ms for sparse keys, while GMRES delivers the strongest iterative convergence, achieving a full-convergence rate of $1.0$ for both matrix families across all tested noise levels. All four solvers maintain a solve-success rate of $1.0$, but Gauss-Seidel falls to an overall full-convergence rate of $0.833$ because some zero-noise runs reach the iteration cap before satisfying the strict stopping criterion. These findings indicate that LU offers the best runtime efficiency for repeated block solves, whereas GMRES provides the most reliable convergence behavior under stochastic corruption.
+
 \end{abstract}
 
 \section{Introduction}
 Image data is common in many computing applications, such as medical diagnostics, remote sensing, and multimedia communication. In many of these image-based computing tasks, the manipulation and analysis of images can be achieved by solving a system of linear equations, as defined by the model, the image, or the process. In this context, the linear equation can be expressed as a matrix, which can be either dense or sparse, depending on the image data and the model. Gaussian elimination, LU decomposition, Gauss-Seidel method with relaxation, and hybrid Krylov subspace methods such as GMRES are some of the fundamental numerical analysis techniques that can be applied to compute the solution to the linear equation.
 
-However, in real-world problems, image data is often subject to random perturbations such as noise, transmission error, compression artifacts, and storage corruption. Small perturbations in the data may cause significant effects on the computation results. This sensitivity is conceptually similar to the avalanche effect in cryptographic systems, where a small change in the input causes a significant change in the output. In image encryption studies, the robustness of the diffusion properties is exploited to enhance the avalanche effect, yet this phenomenon also causes severe error propagation on the corrupted encrypted images, which makes the recovery of the image difficult or impossible \cite{noura-2017}. This shows how small numerical perturbations may cause severe distortion in the image data.
+However, in real-world problems, image data is often subject to random perturbations such as noise, transmission error, compression artifacts, and storage corruption. Small perturbations in the data may cause significant effects on the computation results. This sensitivity is conceptually similar to the avalanche effect in cryptographic systems, where a small change in the input causes a significant change in the output. In image encryption studies, the robustness of the diffusion properties is exploited to enhance the avalanche effect, yet this phenomenon also causes severe error propagation on the corrupted encrypted images, which makes the recovery of the image difficult or impossible (Noura et al., 2017). This shows how small numerical perturbations may cause severe distortion in the image data.
 
-Moreover, in the field of research on image encryption, the significance of robustness in the presence of differential modifications is stressed, while at the same time, the danger of over-sensitivity to such modifications is also pointed out \cite{alghamdi-munir-2024}. Even though the major concern in research on image encryption is centered on security issues, the research shows that computational studies face a fundamental problem which requires assessment of image processing tasks to be evaluated for both performance and their ability to withstand noisy or damaged conditions. Similarly, in numerical linear algebra, any modification in the elements of a matrix could affect the overall behavior of the elimination process.
+Moreover, in the field of research on image encryption, the significance of robustness in the presence of differential modifications is stressed, while at the same time, the danger of over-sensitivity to such modifications is also pointed out (Alghamdi \& Munir, 2024). Even though the major concern in research on image encryption is centered on security issues, the research shows that computational studies face a fundamental problem which requires assessment of image processing tasks to be evaluated for both performance and their ability to withstand noisy or damaged conditions. Similarly, in numerical linear algebra, any modification in the elements of a matrix could affect the overall behavior of the elimination process.
 
 These considerations highlight the importance of systematically comparing how different numerical solvers respond to stochastic corruption in image-derived linear systems. In particular, the current study aims to test the baseline stability of the numerical solver that is based on the algorithm of Gaussian Elimination with Partial Pivoting, the block-reusability efficiency of the numerical solver that is based on the algorithm of LU Decomposition, the smoothing effects of the numerical solver that is based on the algorithm of Gauss-Seidel with Relaxation, and the robustness of the numerical solver that is based on the algorithm of Hybrid GMRES.
 
+
 \section{Preliminaries}
-In this section, the major concepts used in this research are discussed. These include the Hill cipher, dense and sparse matrices, and the four numerical solvers used in the research: Gauss Elimination, LU Decomposition, Gauss-Seidel, and GMRES. It also defines the image quality metrics, Mean Square Error (MSE) and Peak Signal-to-Noise Ratio (PSNR) that serve as benchmarks for assessing solver performance under stochastic data corruption.
+
+In this section, the major concepts used in this research are discussed. These include the Hill cipher, dense and sparse matrices, and the four numerical solvers used in the research: Gauss-Elimination, LU Decomposition, Gauss-Seidel, and GMRES. It also defines the image quality metrics, Mean Square Error (MSE) and Peak Signal-to-Noise Ratio (PSNR), that serve as benchmarks for assessing solver performance under stochastic data corruption.
 
 \subsection{Hill Cipher}
-The Hill cipher is a classical polygraphic substitution cipher developed by Lester S. Hill in 1929. The Hill cipher was based on the principles of linear algebra. The Hill cipher was different from other substitution ciphers like the Caesar cipher, which was based on single-character substitution. In the Hill cipher, blocks of characters were considered to be vectors and were multiplied by a matrix to perform substitution.
 
-In mathematical form, encryption is defined as
-\[
-\mathbf{C} = \mathbf{K} \cdot \mathbf{P} \pmod{m}
-\]
-Where
+The Hill cipher is a classical polygraphic substitution cipher developed by Lester S. Hill in 1929. The Hill cipher was based on the principles of linear algebra. It is different from other substitution ciphers like the Caesar cipher, which was based on single-character substitution. In the Hill cipher, blocks of characters are considered to be vectors and are multiplied by a matrix to perform substitution.
+
+In mathematical form, encryption is defined as:
+$$ \mathbf{C} = \mathbf{K} \cdot \mathbf{P} \pmod{m} $$
+Where:
 \begin{itemize}
-\item $\mathbf{P}$ is the plaintext vector,
-\item $\mathbf{K}$ is the invertible key matrix,
-\item $\mathbf{C}$ is the ciphertext vector, and
-\item $m$ is the modulus, which is commonly $26$ for a text and $256$ for 8-bit grayscale images.
+    \item $\mathbf{P}$ is the plaintext vector,
+    \item $\mathbf{K}$ is the invertible key matrix,
+    \item $\mathbf{C}$ is the ciphertext vector, and
+    \item $m$ is the modulus, which is commonly 26 for text and 256 for 8-bit grayscale images.
 \end{itemize}
 
 A Hill cipher is only valid if the key matrix $\mathbf{K}$ is invertible in $\mathbb{Z}_m$. This requires that the determinant of the matrix and the modulus are coprime:
-\[
-\gcd(\det(\mathbf{K}), m) = 1.
-\]
-Decryption is performed using the inverse key matrix:
-\[
-\mathbf{P} = \mathbf{K}^{-1} \cdot \mathbf{C} \pmod{m}.
-\]
-When this is applied to a digital image, pixel value information is arranged in vectors or matrix blocks and encrypted using the same linear transformation principle. Due to the high redundancy of image information, which is caused by the high correlation of pixel information, the Hill Cipher adds a diffusion effect by mixing pixel value information in the matrix blocks, thus breaking the correlation of the pixel information. The decryption process is highly sensitive to numerical inaccuracies. Inaccurate information introduced to the ciphertext during transmission can affect the matrix inversion, leading to degradation of the image. This is relevant to the robustness of the solver when analyzing the effect of stochastic corruption.
+$$ \gcd(\det(\mathbf{K}), m) = 1 $$
 
-\subsection{Dense and Sparse Matrices}
-In this research, the linear equation can be expressed as a matrix, which can be either dense or sparse, depending on the image data and the model. A dense matrix contains mostly nonzero entries, whereas a sparse matrix contains many zero entries. This distinction matters because matrix structure affects storage, arithmetic cost, coupling between variables, and the convergence behavior of iterative solvers under stochastic corruption.
+Decryption is performed using the inverse key matrix:
+$$ \mathbf{P} = \mathbf{K}^{-1} \cdot \mathbf{C} \pmod{m} $$
+
+When this is applied to a digital image, pixel value information is arranged in vectors or matrix blocks and encrypted using the same linear transformation principle. Due to the high redundancy of image information, which is caused by the high correlation of pixel information, the Hill Cipher adds a diffusion effect by mixing pixel value information in the matrix blocks, thus breaking the correlation of the pixel information. 
+
+The decryption process is highly sensitive to numerical inaccuracies. Inaccurate information introduced to the ciphertext during transmission can affect the matrix inversion, leading to degradation of the image. This is relevant to the robustness of the solver when analyzing the effect of stochastic corruption.
 
 \subsection{Numerical Solvers}
 
 \subsubsection{Gaussian Elimination}
-Gaussian elimination with backward substitution is an algorithm to solve a system of $n$ linear equations in $n$ variables represented as $Ax=b$, where $A$ is the coefficient matrix, $x$ is the vector of variables, and $b$ is the constant vector. The main goal of the Gaussian elimination algorithm is to transform the augmented matrix of the system into an equivalent upper triangular matrix form. This is achieved by a sequence of elimination operations on the variables of the system through three basic row operations that do not change the solution set of the system of equations: scaling, row replacement, and row interchanging.
-
+Gaussian elimination with backward substitution is an algorithm used to solve a system of $n$ linear equations in $n$ variables represented as $\mathbf{A}\mathbf{x}=\mathbf{b}$, where $\mathbf{A}$ is the coefficient matrix, $\mathbf{x}$ is the vector of variables, and $\mathbf{b}$ is the constant vector. The main goal of the Gaussian elimination algorithm is to transform the augmented matrix of the system into an equivalent upper triangular matrix form. This is achieved by a sequence of elimination operations on the variables of the system through three basic row operations that do not change the solution set of the system of equations:
 \begin{itemize}
-\item Scaling: $(\lambda \, E_i) \rightarrow (E_i)$ where $\lambda \neq 0$.
-\item Row replacement: $(E_i + \lambda \, E_j) \rightarrow (E_i)$.
-\item Row interchanging: $(E_i) \leftrightarrow (E_j)$.
+    \item \textbf{Scaling:} $(\lambda E_i) \rightarrow (E_i)$ where $\lambda \neq 0$.
+    \item \textbf{Row replacement:} $(E_i + \lambda E_j) \rightarrow (E_i)$.
+    \item \textbf{Row interchanging:} $(E_i) \leftrightarrow (E_j)$.
 \end{itemize}
 
 The Gaussian elimination algorithm has two main steps:
+\begin{enumerate}
+    \item \textbf{Elimination Phase:} The main goal of the elimination phase is to eliminate the elements below the main diagonal of the augmented matrix of the system through the application of the basic row operations. If the element in the $i$-th row and $i$-th column, i.e., $a_{ii}$, is zero, the rows $E_i$ and $E_j$ should be interchanged, where $E_i$ is the current row of the augmented matrix, and $E_j$ is the row in the augmented matrix such that the element in the $j$-th column of $E_j$ is not zero.
+    \item \textbf{Backward Substitution Phase:} The system is reduced to upper triangular form, and the variables are then recovered in reverse order:
+    \[
+    x_n, \; x_{n-1}, \; \dots, \; x_1.
+    \]
+\end{enumerate}
 
-1) Elimination Phase: The main goal of the elimination phase is to eliminate the elements below the main diagonal of the augmented matrix of the system through the application of the basic row operations. If the element in the $i$th row and $i$th column, that is, $a_{ii}$, is zero, the rows $E_i$ and $E_j$ should be interchanged, where $E_i$ is the current row of the augmented matrix, and $E_j$ is the row in the augmented matrix such that the element in the $j$th column of $E_j$ is not zero.
-
-2) Backward Substitution Phase: The Gaussian elimination algorithm transforms the system of linear equations into an upper triangular form, after which the variables $x_n, x_{n-1}, \ldots, x_1$ can be found sequentially starting from the last equation up to the first equation.
-
-The computational cost of the Gaussian elimination algorithm for the system of $n$ linear equations in $n$ variables can be found to be of the order of $O(n^3)$ for the multiplications/divisions as well as the additions/subtractions.
+The computational cost of the Gaussian elimination algorithm for a system of $n$ linear equations in $n$ variables is on the order of $\mathcal{O}(n^3)$ for multiplications/divisions as well as additions/subtractions.
 
 \paragraph{Stability and Noise Sensitivity}
-A key component of the experimental protocol is the Noise Injection stress test, where Gaussian White Noise is added to the encrypted blocks $(C' = C + \varepsilon)$.
-
-\paragraph{Rounding Errors}
-As the computational cost of the Gaussian Elimination method is given by $O(n^3)$, the rounding errors that occur during the elimination of $64$ variables resulting from the $8 \times 8$ matrix can cause salt-and-pepper noise to be introduced in the reconstructed image if the key matrix is poorly conditioned.
-
-\paragraph{Partial Pivoting}
-To enhance the robustness of the system, the algorithm makes use of the Partial Pivoting method. By choosing the pivot with the maximum value during the scaling operation, the effects of the injected random noise are reduced to ensure the accuracy of the baseline recovery for comparison with the Gauss-Seidel method.
+A key component of the experimental protocol is the Noise Injection stress test, where Gaussian White Noise is added to the encrypted blocks ($\mathbf{C}' = \mathbf{C} + \varepsilon$). 
+\begin{itemize}
+    \item \textbf{Rounding Errors:} As the computational cost of the Gaussian Elimination method is given by $\mathcal{O}(n^3)$, the rounding errors that occur during the elimination of 64 variables resulting from an $8 \times 8$ matrix can cause salt-and-pepper noise to be introduced in the reconstructed image if the key matrix is poorly conditioned.
+    \item \textbf{Partial Pivoting:} To enhance the robustness of the system, the algorithm makes use of the Partial Pivoting method. By choosing the pivot with the maximum value during the scaling operation, the effects of the injected random noise are reduced to ensure the accuracy of the Baseline recovery for comparison with the Gauss-Seidel method.
+\end{itemize}
 
 \subsubsection{LU Decomposition}
-The LU factorization is a particularly useful factorization of a matrix $A$ where $A=LU$.
+The LU factorization is a particularly useful factorization of a matrix $\mathbf{A}$ where $\mathbf{A}=\mathbf{L}\mathbf{U}$:
 \begin{itemize}
-\item $L$ is a lower triangular matrix.
-\item $U$ is an upper triangular matrix.
+    \item $\mathbf{L}$ is a lower triangular matrix.
+    \item $\mathbf{U}$ is an upper triangular matrix.
 \end{itemize}
 
 \paragraph{Theorem 1: LU Factorization Without Pivoting}
-Suppose that Gaussian elimination can be applied to the system $Ax=b$ without any row interchange operations. Then, matrix $A$ can be written as the product of a lower triangular matrix $L$ and an upper triangular matrix $U$, such that $A=LU$.
+Suppose that Gaussian elimination can be applied to the system $\mathbf{A}\mathbf{x}=\mathbf{b}$ without any row interchange operations. Then, matrix $\mathbf{A}$ can be written as the product of a lower triangular matrix $\mathbf{L}$ and an upper triangular matrix $\mathbf{U}$, such that $\mathbf{A}=\mathbf{L}\mathbf{U}$.
 \begin{itemize}
-\item $U$ is the resulting upper-triangular matrix from the elimination process.
-\item $L$ is the unit lower-triangular matrix whose subdiagonal entries are the multipliers
+    \item $\mathbf{U}$ is the resulting upper-triangular matrix from the elimination process.
+    \item $\mathbf{L}$ is the unit lower-triangular matrix whose subdiagonal entries are the multipliers $m_{j,i}=\frac{a_{ji}^{(i)}}{a_{ii}^{(i)}}$.
 \end{itemize}
-\[
-m_{j,i} = \frac{a_{ji}^{(i)}}{a_{ii}^{(i)}}.
-\]
 
 \paragraph{LU Factorization with Row Interchanges}
-For any nonsingular matrix $A$, there exists a permutation matrix $P$ such that
-\[
-PA = LU,
-\]
-where $L$ is a unit lower triangular matrix and $U$ is an upper triangular matrix. Since permutation matrices satisfy $P^{-1} = P^T$, one may write
-\[
-A = (P^{-1}L)U = (P^TL)U.
-\]
-In general, $P^TL$ is not lower triangular unless $P=I$.
+For any nonsingular matrix $\mathbf{A}$, there exists a permutation matrix $\mathbf{P}$ such that $\mathbf{P}\mathbf{A} = \mathbf{L}\mathbf{U}$, where $\mathbf{L}$ is a unit lower triangular matrix and $\mathbf{U}$ is an upper triangular matrix. Since permutation matrices satisfy $\mathbf{P}^{-1} = \mathbf{P}^T$, we may write:
+$$ \mathbf{A} = (\mathbf{P}^{-1} \mathbf{L})\mathbf{U} = (\mathbf{P}^T \mathbf{L})\mathbf{U} $$
+In general, $\mathbf{P}^T \mathbf{L}$ is not lower triangular unless $\mathbf{P}=\mathbf{I}$.
 
 \paragraph{Application in Image Decryption}
-In the context of digital image security, LU Decomposition is commonly used because it is more efficient in terms of computation when solving a system of linear equations. In block-type encryption techniques, it is assumed that a digital image is divided into small blocks of pixels, such as $8 \times 8$ in size. If a key matrix $A$ is employed in image encryption, it is only factorized into $L$ and $U$ matrices once. This way many blocks are processed efficiently without having to perform a time-consuming $O(n^3)$ algorithm of Gaussian elimination for every block. Incorporating a permutation matrix $P$ ensures that row interchanges are allowed during the encryption process, thus preventing zero pivot elements and thereby enhancing numerical stability in the decryption mechanism.
-
-\paragraph{Block Processing Efficiency}
-In block-type encryption techniques, it is assumed that a digital image is divided into small blocks of pixels, say $8 \times 8$ in size. If a key matrix $A$ is employed in image encryption, it is only factorized into $L$ and $U$ matrices once. This way many blocks are processed efficiently without having to perform a time-consuming $O(n^3)$ algorithm of Gaussian elimination for every block.
-
-\paragraph{Numerical Stability}
-Incorporating a permutation matrix $P$ ensures that row interchanges are allowed during the encryption process, thus preventing zero pivot elements and thereby enhancing numerical stability in the decryption mechanism.
+In the context of digital image security, LU Decomposition is commonly used because it is more efficient in terms of computation when solving a system of linear equations.
+\begin{itemize}
+    \item \textbf{Block Processing Efficiency:} In block-type encryption techniques, it is assumed that a digital image is divided into small blocks of pixels, say $8 \times 8$ in size. If a key matrix $\mathbf{A}$ is employed in image encryption, it is only factorized into $\mathbf{L}$ and $\mathbf{U}$ matrices once. This way many blocks are processed efficiently without having to perform the time-consuming $\mathcal{O}(n^3)$ algorithm of Gaussian elimination for every block.
+    \item \textbf{Numerical Stability:} Incorporating a permutation matrix $\mathbf{P}$ ensures that row interchanges are allowed during the encryption process, thus preventing zero pivot elements and thereby enhancing numerical stability in the decryption mechanism.
+\end{itemize}
 
 \subsubsection{Gauss-Seidel with Relaxation}
-The Gauss-Seidel with relaxation method, also known as the Successive Over-Relaxation (SOR) method, is an iterative method used to solve systems of linear equations. This method is derived from the fundamental theories of numerical analysis and matrix computation. This method is different from the standard Gauss-Seidel method, which uses only the latest values obtained during the solution computation. The solution obtained by the Gauss-Seidel method with relaxation is adjusted by a relaxation parameter to accelerate convergence.
+The Gauss-Seidel with relaxation method, also known as the Successive Over-Relaxation (SOR) method, is an iterative method used to solve systems of linear equations. This method is derived from the fundamental theories of Numerical Analysis and Matrix Computation (Burden \& Faires, 2015; Varga, 1962). This method is different from the standard Gauss-Seidel method, which uses only the latest values obtained during the solution computation. The solution obtained by the Gauss-Seidel method with relaxation is adjusted by a relaxation parameter to accelerate convergence (Frankel, 1950; Young, 1950).
 
-In mathematical form,
-\[
-(D - \omega L)x^{(k+1)} = \omega b + (1 - \omega)Dx^{(k)},
-\]
-where:
+In mathematical form:
+$$ (D - \omega L)\mathbf{x}^{(k+1)} = \omega \mathbf{b} + (1 - \omega)D\mathbf{x}^{(k)} $$
+Where:
 \begin{itemize}
-\item $D$ is the diagonal matrix containing the diagonal elements of the coefficient matrix,
-\item $L$ is the strictly lower triangular matrix containing the elements below the diagonal,
-\item $x^{(k)}$ is the solution vector from the previous iteration,
-\item $x^{(k+1)}$ is the updated solution vector after the current iteration,
-\item $b$ is the constant vector of the system of equations, and
-\item $\omega$ is the relaxation parameter that controls the speed of convergence.
+    \item $D$ is the diagonal matrix containing the diagonal elements of the coefficient matrix,
+    \item $L$ is the strictly lower triangular matrix containing the elements below the diagonal,
+    \item $\mathbf{x}^{(k)}$ is the solution vector from the previous iteration,
+    \item $\mathbf{x}^{(k+1)}$ is the updated solution vector after the current iteration,
+    \item $\mathbf{b}$ is the constant vector of the system of equations, and
+    \item $\omega$ is the relaxation parameter that controls the speed of convergence.
 \end{itemize}
+
 The coefficient matrix of the given system of linear equations is represented as a sum of three matrices: $D$, a diagonal matrix; $L$, a strictly lower triangular matrix; and $U$, a strictly upper triangular matrix. The relaxation parameter $\omega$ is used to adjust the solution obtained by the Gauss-Seidel method. If $1 < \omega < 2$, over-relaxation is achieved by this method, which can converge faster to the solution by moving more aggressively towards it.
 
-This method is mostly used for solving large linear systems that come up as a result of mathematical models such as differential equations and grids. This method is appropriate because it is done iteratively and can be carried out on a digital computer. However, it has been noted that the method's performance largely depends on the relaxation parameter used. If an appropriate relaxation parameter is not used, it can diverge or converge slowly. Therefore, it is important to ensure that an appropriate relaxation parameter is used to ensure convergence when solving large systems numerically. 
+This method is mostly used for solving large linear systems that come up as a result of mathematical models such as differential equations and grids. It is highly appropriate for digital computing due to its iterative nature. However, it has been noted that the method's performance largely depends on the relaxation parameter used. If an appropriate relaxation parameter is not used, the system can diverge or converge slowly. Therefore, it is important to ensure that an appropriate parameter is utilized to guarantee convergence when solving large systems numerically.
 
-In image decryption, it increases the speed of the convergence of the iterative solvers in reversing encryption processes modeled for large systems of linear equations. By introducing an algorithm that uses relaxation parameters, this enhances the stability and speed of reconstructing the original pixel values from encrypted data, which is particularly effective in chaotic or transformation-based encryption schemes \cite{burden-faires-2015,frankel-1950,varga-1962,young-1950,trefethen-bau-1997}.
+In image decryption, it increases the speed of convergence for iterative solvers when reversing encryption processes modeled as large systems of linear equations. By introducing an algorithm that uses relaxation parameters, it enhances the stability and speed of reconstructing original pixel values from encrypted data, which is particularly effective in chaotic or transformation-based encryption schemes (Trefethen \& Bau, 1997).
 
 \subsubsection{GMRES (Hybrid)}
-The Generalized Minimal Residual method (GMRES) is an iterative Krylov subspace algorithm introduced by Saad and Schultz in 1986 to address large nonsymmetric systems of linear equations $Ax=b$. It is considered a non-stationary iterative solver with a unique trade-off in terms of efficiency and precision.
+The Generalized Minimal Residual method (GMRES) is an iterative Krylov subspace algorithm introduced by Saad and Schultz (1986) to address large nonsymmetric systems of linear equations $\mathbf{A}\mathbf{x} = \mathbf{b}$. It is considered a non-stationary iterative solver with a unique trade-off in terms of efficiency and precision.
 
 \paragraph{Krylov Subspace and the Arnoldi Process}
-Unlike stationary methods like Gauss-Seidel, GMRES constructs an approximate solution $x_n$ from the $n$th Krylov subspace, defined as
-\[
-K_n(A,r_0) = \operatorname{span}\{r_0, Ar_0, A^2r_0, \ldots, A^{n-1}r_0\},
-\]
-where $r_0 = b - Ax_0$ is the initial residual. The algorithm uses the Arnoldi process, an orthogonalization method that follows the modified Gram-Schmidt procedure to build an orthonormal basis $\{v_1, v_2, \ldots, v_n\}$ for the subspace. This gives an upper Hessenberg matrix $H_n$ that represents the projection of matrix $A$ onto $K_n$.
+Unlike stationary methods like Gauss-Seidel, GMRES constructs an approximate solution $\mathbf{x}_n$ from the $n$-th Krylov subspace, defined as:
+$$ \mathcal{K}_{n}(\mathbf{A},\mathbf{r}_0) = \text{span}\{\mathbf{r}_0, \mathbf{A}\mathbf{r}_0, \mathbf{A}^{2}\mathbf{r}_0, \dots, \mathbf{A}^{n-1}\mathbf{r}_0\} $$
+Where $\mathbf{r}_0 = \mathbf{b} - \mathbf{A}\mathbf{x}_0$ is the initial residual. The algorithm uses the Arnoldi process, an orthogonalization method that follows the modified Gram-Schmidt procedure, to build an orthonormal basis $\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\}$ for the subspace. This produces an upper Hessenberg matrix $\mathbf{H}_n$ that represents the projection of matrix $\mathbf{A}$ onto $\mathcal{K}_n$.
 
 \paragraph{Residual Minimization}
-The defining characteristic of GMRES is its optimality property, which is that at each iteration $n$, it finds the $x_n \in x_0 + K_n$ that minimizes the Euclidean norm of the residual,
-\[
-\|r_n\|_2 = \min_{p \in \mathcal{P}_n,\, p(0)=1} \|p(A)r_0\|_2.
-\]
-The minimization process is achieved by solving a compact least-squares problem of size $(n+1) \times n$ involving the Hessenberg matrix. Within the context of the matrix-based image transform, the decryption of the pixel matrix into the most mathematically precise representation possible within the chosen subspace dimensionality is guaranteed.
+The defining characteristic of GMRES is its optimality property: at each iteration $n$, it finds the $\mathbf{x}_n \in \mathbf{x}_0 + \mathcal{K}_n$ that minimizes the Euclidean norm of the residual:
+$$ \|\mathbf{r}_n\|_2 = \min_{p \in \mathcal{P}_n, p(0)=1} \|p(\mathbf{A})\mathbf{r}_0\|_2 $$
+This minimization process is achieved by solving a compact least squares problem of size $(n+1) \times n$ involving the Hessenberg Matrix. Within the context of the matrix-based image transform, the decryption of the pixel matrix into the most mathematically precise representation possible within the chosen subspace dimensionality is guaranteed.
 
 \paragraph{Computational Constraints and Restarting}
-Another important factor to keep in mind with GMRES is the fact that the computational cost and memory requirements are linearly proportional to the iteration count, denoted as $n$. To reduce the memory overhead involved with the computation of the high-resolution image matrices, the restarted GMRES, denoted as $\mathrm{GMRES}(k)$, is often utilized. Here, the current approximation is utilized as the new initial guess after $k$ iterations, and the cycle starts again. This reduces the orthogonalization bottleneck without compromising the ability to solve non-normal matrices, which are often the result of complex encryption keys \cite{nachtigal-gmres-1992}.
+Another important factor to consider with GMRES is that the computational cost and memory requirements are linearly proportional to the iteration count, denoted as $n$. To reduce the memory overhead involved with the computation of high-resolution image matrices, Restarted GMRES, denoted as GMRES($k$), is often utilized. Here, the current approximation is utilized as the new initial guess after $k$ iterations, and the cycle starts again. This reduces the orthogonalization bottleneck without compromising the ability to solve non-normal matrices, which are often the result of complex encryption keys (Nachtigal et al., 1992).
 
-\subsection{Image Quality Metrics}
-The image quality metrics used in this research are Mean Square Error (MSE) and Peak Signal-to-Noise Ratio (PSNR). These serve as benchmarks for assessing solver performance under stochastic data corruption.
+\section{Methodology and Application}
 
-For an original image $I$ and reconstructed image $\hat{I}$ with $N$ pixels,
-\[
-\operatorname{MSE}(I, \hat{I}) = \frac{1}{N}\sum_{k=1}^{N}(I_k - \hat{I}_k)^2.
-\]
-Using unit-range image normalization, PSNR is reported as
-\[
-\operatorname{PSNR}(I, \hat{I}) = 10\log_{10}\left(\frac{1}{\operatorname{MSE}(I, \hat{I})}\right).
-\]
-Lower MSE and higher PSNR indicate better reconstruction quality.
+The study aims to assess how direct and factorization and iterative linear solvers perform both numerically and structurally when applied to image decryption application. The research design is a comparative benchmark which tests image data under different levels of matrix sparsity and stochastic corruption in a controlled environment. By separating these factors, the study calculates each algorithm's ``breakdown point'' in terms of convergence reliability, runtime, and reconstruction accuracy which is quantified using Peak Signal-to-Noise Ratio (PSNR) and Mean Squared Error (MSE).
 
-\section{Benchmark Design}
-\subsection{Dataset}
-The experiments use the 24 Kodak lossless benchmark images listed in the project manifest at \texttt{data/benchmark\_manifests/dataset\_manifest.csv}. In this run, the notebook is restricted to the Kodak subset only, namely \texttt{kodim01} through \texttt{kodim24}. These are standard photographic benchmark images distributed from the Kodak lossless test-image collection \cite{kodak-lossless}.
+\subsection{Data Source and Preprocessing}
 
-\artifactfigure{out/figures/kodak_contact_sheet.png}{0.80}{Kodak contact sheet generated by the notebook for the exact 24 benchmark images used in the study.}
+The study utilizes the Kodak Lossless True Color Image Suite, a standardized dataset comprising 24 uncompressed images widely employed in image processing, compression, and cryptography research to benchmark algorithmic performance (Eastman Kodak Company, 1999). Standardized datasets like the Kodak suite are critical in computational imaging because they provide a diverse set of textures, edges, and smooth regions. This ensures that the evaluated numerical methods are tested against a representative cross-section of real-world structural complexities rather than synthetic or biased inputs (Gonzalez \& Woods, 2018). 
 
-\FloatBarrier
+Each image is converted to grayscale, resized to $128 \times 128$, and stored with fixed provenance so the exact dataset can be reproduced. This preprocessing step ensures that solver differences come from the numerical methods rather than inconsistent inputs. The researcher workflow follows the same sequence for every image: discretize into blocks, generate key matrices, inject noise, and solve each block system with multiple methods.
 
-\subsection{Pipeline}
-The experimental workflow follows the pseudocode-driven plan used for the notebook update.
-\begin{enumerate}
-\item Convert each benchmark image to grayscale and resize it to $128 \times 128$.
-\item Partition the image into $8 \times 8$ blocks, yielding $64$-dimensional linear systems.
-\item Generate a dense key matrix and a sparse key matrix.
-\item Encrypt each block and inject additive Gaussian noise before decryption.
-\item Recover each block with multiple solvers and compare numerical quality and cost.
-\item Generate graphical visualizations from the numerical outputs for analysis and reporting: dataset contact sheets, solver metric graphs, Gauss-Seidel convergence plots, wall-of-decryption image panels, absolute-error heatmaps, and the paper triptych.
-\end{enumerate}
+\subsubsection{Image Discretization and Block Partitioning}
+The input image is changed into a matrix that shows numerical intensity matrix. The image gets divided into $8 \times 8$ pixel sections to facilitate fast processing and maintain compatibility with standard block-cipher methods. The linear system $Ax = b$ uses each block as a constant vector $b \in \mathbb{R}^{64}$ with the decryption key represented by matrix $A$.
 
-\section{Methods}
-\subsection{Solvers}
-The notebook implements the following methods:
-\begin{itemize}
-\item \textbf{Gaussian Elimination with partial pivoting}: direct method used as the classical baseline for row-wise elimination stability \cite{chapra-canale-2010}.
-\item \textbf{LU Decomposition (Doolittle)}: factorization-based method that amortizes the matrix factorization across repeated block solves \cite{chapra-canale-2010,lu-notes}.
-\item \textbf{Gauss-Seidel with relaxation}: iterative method used to study convergence and noise sensitivity in repeated fixed-point updates.
-\item \textbf{GMRES}: Krylov-subspace hybrid method added to match the target plan and to provide a modern iterative reference.
-\end{itemize}
+\subsubsection{Key Matrix Generation (Dense vs. Sparse)}
+The researcher generates two key families: a dense matrix and a sparse matrix. Both are given a diagonal boost so the block systems stay solvable across repeated runs. This allows the study to isolate how structural sparsity changes convergence behavior, runtime, and error propagation.
 
-\subsection{From Pseudocode to Code}
-The notebook was rewritten so that each solver mirrors the structure of the supplied pseudocode rather than hiding the numerical work inside a library call.
+\subsubsection{Stochastic Noise Injection}
+To model real-world application, Gaussian noise is added to each encrypted block before decryption. This makes the ciphertext slightly perturbed, which is a realistic proxy for compression artifacts, transmission errors, or storage degradation. 
 
-For Gaussian Elimination, the pseudocode specifies partial pivoting with row exchanges, multiplier storage, and back substitution. The notebook implementation follows that pattern directly: it builds an augmented matrix, tracks row order through a pointer array, swaps pivot rows, stores the elimination multipliers below the diagonal, and then performs explicit backward substitution to recover the block solution.
+\subsection{Numerical Solvers and Applications}
+Before evaluating the performance of each algorithm, it is necessary to establish the structural properties of the key matrices involved. In numerical linear algebra, a \textbf{dense matrix} is defined as a matrix in which the vast majority of its elements are nonzero. Processing a dense matrix requires standard computational approaches where memory is allocated and arithmetic operations are performed for nearly every entry (Golub \& Van Loan, 2013). 
 
-For LU factorization, the pseudocode uses the Doolittle-style in-place decomposition. The notebook follows the same sequence: each column is normalized by the pivot, the Schur-complement update is applied to the trailing submatrix, and the resulting packed matrix is reused by a separate forward/back substitution routine for every encrypted image block.
+Conversely, a \textbf{sparse matrix} is one where a significant proportion of the elements are zero. According to Saad (2003), a matrix is practically considered sparse if it contains enough zero entries that it becomes computationally advantageous to exploit this structural sparsity—specifically to reduce memory storage requirements and accelerate the execution of matrix operations by bypassing zero-value computations.
 
-For Gauss-Seidel, the pseudocode repeatedly updates the current iterate using the newest available values, checks an approximate stopping condition, and records whether the iterate reached the iteration cap. The notebook reflects that structure exactly. It normalizes by the diagonal, applies the relaxation factor during each component update, measures a relative residual after every sweep, and optionally stores the residual history for the convergence-trace plots.
+\paragraph{Gaussian Elimination}
+Gaussian Elimination is the baseline direct method. In this application, it provides a reference for stability under partial pivoting and shows how a classical solver behaves when small noise is present in the ciphertext (Chapra \& Canale, 2010).
 
-For GMRES, the notebook intentionally delegates the Krylov basis construction to SciPy because the project goal is comparison rather than re-deriving Arnoldi from scratch. Even so, the surrounding experiment logic mirrors the pseudocode plan: the same noisy block systems are passed to the solver, iteration counts are recorded through a callback, and the resulting residuals are exported in the same artifact format as the hand-coded methods.
+\paragraph{LU Decomposition}
+LU is the factorization-based method. It is well suited to block decryption because the same key matrix is reused across many blocks. The researcher factors once and reuses the triangular solves, which makes LU the fastest option in repeated decryption runs (Golub \& Van Loan, 2013).
 
-\subsection{How the Notebook Works}
-The code path from raw Kodak image to final table is fully deterministic once the random seed is fixed.
-\begin{enumerate}
-\item The configuration cell selects the Kodak subset, the block size, the noise levels, and the solver tolerances.
-\item The dataset loader converts each image to grayscale, resizes it to $128 \times 128$, stores provenance metadata, and writes a contact sheet for the exact 24 images used in the run.
-\item Two key matrices are generated: one dense and one sparse, each with a diagonal boost so that the block systems remain numerically solvable across all repeated experiments.
-\item Each image is split into $8 \times 8$ blocks, flattened into $64$-vectors, encrypted by matrix multiplication, then perturbed with Gaussian noise.
-\item Every solver is run on the same noisy blocks. The code measures reconstruction fidelity, residuals, runtime, mean iterations, and whether any block solve reached the iteration cap.
-\item The export stage aggregates those per-image records into CSV summaries, LaTeX tables, metric figures, convergence plots, and wall-of-decryption panels that the paper includes directly.
-\end{enumerate}
+\paragraph{Gauss-Seidel Method}
+Gauss-Seidel is the iterative smoothing method. It reveals convergence behavior through residual traces and is useful for understanding how noise affects iterative stability over repeated sweeps (Burden \& Faires, 2015).
 
-\subsection{Independent Variables}
-The notebook varies two main factors.
-\begin{itemize}
-\item \textbf{Matrix type}: dense and sparse key matrices.
-\item \textbf{Noise level}: Gaussian noise with $\sigma \in \{0.00, 0.01, 0.03, 0.07, 0.12\}$.
-\end{itemize}
-
-Each condition is repeated three times across all 24 Kodak images. The run configuration and machine metadata are stored in \texttt{out/config.json} and \texttt{out/run\_info.json}.
-
-\subsection{Evaluation Metrics}
-The paper uses the artifacts generated by the notebook and post-processing scripts.
-\begin{itemize}
-\item PSNR and MSE for reconstruction quality.
-\item Relative error and relative residual for numerical accuracy.
-\item Median runtime and interquartile range for efficiency.
-\item Success rate for robustness under each condition, defined as a complete solve with no failed blocks.
-\item Full-convergence rate, defined more strictly as a solve that also avoids hitting the configured iteration cap.
-\item Gauss-Seidel convergence traces for iterative behavior.
-\end{itemize}
+\paragraph{Hybrid GMRES-Richardson}
+GMRES is the Krylov-subspace method used as the hybrid iterative reference, originally introduced by Saad and Schultz (1986). The restarted variant limits memory growth while preserving robust convergence on nonsymmetric systems, which is common when the key matrix is irregular (Nachtigal et al., 1992).
 
 \section{Results}
-\subsection{Primary Tables}
-The following two tables summarize the primary manuscript condition at $\sigma = 0.01$ for dense and sparse matrices.
 
-\begin{table}[H]
-\centering
-\caption{Primary dense-matrix comparison at $\sigma = 0.01$.}
-\resizebox{\linewidth}{!}{\artifactinput{out/tables/paper_dense_primary.tex}}
-\end{table}
+In this subsection, the metric trend plots show how PSNR (Peak Signal-to-Noise Ratio) changes with noise level, while the summary tables show that PSNR is identical across solvers for each matrix type at the aggregated setting. The tables therefore emphasize median time and full-convergence behavior aggregated across noise levels. The wall-of-decryption panels show the visual impact on real images, the absolute-error heatmaps highlight where errors concentrate, and the Gauss-Seidel convergence traces reveal how quickly (or slowly) the iteration stabilizes for dense versus sparse keys.
 
-\begin{table}[H]
-\centering
-\caption{Primary sparse-matrix comparison at $\sigma = 0.01$.}
-\resizebox{\linewidth}{!}{\artifactinput{out/tables/paper_sparse_primary.tex}}
-\end{table}
+The tables below report the primary manuscript condition at $\sigma = 0.01$ for dense and sparse matrices.
 
 \begin{table}[H]
 \centering
 \caption{Overall solver summary aggregated across all noise levels for the Kodak-only run.}
-\resizebox{\linewidth}{!}{\artifactinput{out/tables/paper_overall_summary.tex}}
+\begin{tabular}{llrrr}
+\toprule
+Matrix & Solver & PSNR (dB) & Median Time (ms) & Full Convergence\\
+\midrule
+dense & Gaussian & 63.828 & 1271.72 & 1.000\\
+dense & LU & 63.828 & 244.71 & 1.000\\
+dense & Gauss-Seidel & 63.828 & 3016.62 & 0.833\\
+dense & GMRES & 63.828 & 362.87 & 1.000\\
+sparse & Gaussian & 57.848 & 1278.18 & 1.000\\
+sparse & LU & 57.848 & 246.03 & 1.000\\
+sparse & Gauss-Seidel & 57.848 & 2581.89 & 0.833\\
+sparse & GMRES & 57.848 & 363.92 & 1.000\\
+\bottomrule
+\end{tabular}
 \end{table}
 
+This table summarizes performance averaged across all noise levels. PSNR stays consistent within each matrix type, so the differences that matter most are median time and full-convergence rate. It highlights that LU is much faster than the other methods, while Gauss-Seidel has the lowest full-convergence rate.
 
-\subsection{Visual Results}
-\artifactfigure{out/figures/metrics_dense.png}{0.98}{Dense-key trends across noise for the compared solvers.}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{out/figures/metrics_dense.png}
+    \caption{Dense-key trends across noise for the compared solvers.}
+    \caption*{This plot shows how reconstruction quality changes as noise increases when the key matrix is dense. Curves that stay higher and flatter indicate solvers that are more robust to noise, while steeper declines suggest greater sensitivity. The spacing between lines makes it easy to see which solver holds up best as corruption grows.}
+\end{figure}
 
-\artifactfigure{out/figures/metrics_sparse.png}{0.98}{Sparse-key trends across noise for the compared solvers.}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{out/figures/metrics_sparse.png}
+    \caption{Sparse-key trends across noise for the compared solvers.}
+    \caption*{This plot shows how reconstruction quality changes with noise when the key matrix is sparse. It helps the reader see whether sparsity makes the solvers degrade faster or more slowly compared with the dense case. Curves that stay higher indicate better robustness under the sparse structure.}
+\end{figure}
 
-\artifactfigure{out/figures/wall_01.png}{0.98}{Representative wall of decryption showing the original image, the encrypted-noisy image, and the recovered outputs from Gaussian, LU, Gauss-Seidel, and GMRES.}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{out/figures/wall_01.png}
+    \caption{Representative wall of decryption showing the original image, the encrypted-noisy image, and the recovered outputs from Gaussian, LU, Gauss-Seidel, and GMRES.}
+    \caption*{The wall-of-decryption panel gives a side-by-side visual check of solver quality. Reconstructions that look closest to the original indicate better recovery, while visible artifacts show where noise and solver choice begins to break the image structure.}
+\end{figure}
 
-\artifactfigure{out/figures/wall_err_01.png}{0.98}{Representative absolute-error maps for the first wall example.}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{out/figures/wall_err_01.png}
+    \caption{Representative absolute-error maps for the first wall example.}
+    \caption*{The error maps show where reconstruction deviates most from the original. Brighter regions mark larger errors, which helps the reader see whether mistakes cluster around edges, textures, or smooth areas.}
+\end{figure}
 
-\artifactfigure{out/figures/paper_triptych.png}{0.92}{Best, median, and worst Gauss-Seidel reconstruction examples by PSNR.}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{out/figures/paper_triptych.png}
+    \caption{Best, median, and worst Gauss-Seidel reconstruction examples by PSNR.}
+    \caption*{The triptych summarizes variability within Gauss-Seidel by showing best, typical, and worst outcomes. It makes the range of expected quality easy to grasp without scanning all individual cases. It gives a quick visual sense of how much quality can vary for this solver, from strong recovery to visibly degraded output. The reader can see not just the average case, but also the range of outcomes Gauss-Seidel can produce under the same experimental setup.}
+\end{figure}
 
-\artifactfigure{out/figures/gs_convergence_traces.png}{0.96}{Gauss-Seidel convergence traces for the first Kodak case, split by dense and sparse keys. When only two visual bands are apparent, that is expected: within each matrix family the noise-level traces overlap almost perfectly, which indicates that the convergence profile is dominated by the matrix spectrum rather than the noise amplitude.}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{out/figures/gs_convergence_traces.png}
+    \caption{Gauss-Seidel convergence traces for the first Kodak case, split by dense and sparse keys.}
+    \caption*{This figure shows how fast Gauss-Seidel reduces its residual over iterations for the first Kodak image. Steeper drops mean faster stabilization, while flatter curves mean slower progress. The dense versus sparse split helps the reader see how matrix structure affects convergence speed and stability.}
+\end{figure}
 
-\subsection{Results Highlights}
-Two high-level outcomes stand out in the regenerated summaries.
+\subsection{Results Highlights} 
 
-First, among the four study solvers, LU is the speed leader. Averaged over all noise levels, its median solve time is about $244.71$ ms for dense keys and $246.03$ ms for sparse keys, substantially ahead of Gaussian elimination, GMRES, and Gauss-Seidel.
+First, LU is the speed leader. Averaged over all noise levels, its median solve time is about 244.71 ms for dense keys and 246.03 ms for sparse keys, well ahead of Gaussian Elimination, GMRES, and Gauss-Seidel. 
 
-Second, the strongest convergence behavior among the iterative methods is delivered by GMRES. Its full-convergence rate is $1.0$ for both dense and sparse matrices across all tested noise levels, whereas Gauss-Seidel drops to an overall full-convergence rate of $0.833$ because some zero-noise cases hit the iteration ceiling before satisfying the strict stopping rule. At the same time, all methods achieve a solve-success rate of $1.0$, so the practical difference is not reconstruction failure but how reliably each method satisfies the configured convergence criterion.
+Second, GMRES shows the most reliable convergence among the iterative methods. Its full-convergence rate is 1.0 for both dense and sparse matrices across all tested noise levels, while Gauss-Seidel drops to an overall full-convergence rate of 0.833 because some zero-noise cases reach the iteration ceiling before satisfying the strict stopping rule. All methods still achieve a solve-success rate of 1.0, so the practical difference is convergence reliability rather than outright failure.
 
-\subsection{Interpretation}
-The quantitative tables and figures are designed to answer four questions.
-\begin{enumerate}
-\item How much reconstruction quality is lost as Gaussian noise increases?
-\item Does sparse structure help or hurt solver behavior under the chosen diagonal boosts?
-\item How large is the runtime gap between direct, factorization-based, iterative, and hybrid methods?
-\item Which solver offers the best balance of reconstruction quality, convergence behavior, and runtime under stochastic corruption?
-\end{enumerate}
+\section{Discussion} 
 
-The artifact set generated by the notebook is intended to support those questions directly rather than through manually copied statistics.
+The researcher interprets the results in terms of real-world use, where encrypted images must be recovered even when the data are imperfect. Hospitals transmit scans across networks, satellites downlink compressed imagery, and secure media pipelines store or stream files that may pick up noise. In each case, small numerical errors in the ciphertext can turn into visible artifacts after decryption. The study provides a practical way to choose solvers that reduce that risk while balancing speed and stability.
 
-\section{Discussion}
-Three practical observations motivate the current design.
+The tables show that reconstruction quality (PSNR) is essentially the same across solvers for a given matrix type in the summarized setting. This means the meaningful differences are runtime and convergence reliability. LU remains the speed leader when the same key matrix is reused across many blocks, because the factorization cost is paid once and the repeated solves are cheap. GMRES delivers the most consistent full convergence under noise, while Gauss-Seidel can still recover blocks but occasionally stops at the iteration cap before meeting the strict convergence test.
 
-First, LU decomposition is expected to remain highly competitive whenever the same key matrix is reused across many blocks, because the factorization cost is paid once and the subsequent solves are comparatively cheap.
+Matrix structure also matters. Even when dense and sparse keys yield similar PSNR, they can lead to different runtime profiles and convergence behavior. This is important for deployment choices: if speed is the priority and the key is reused, LU is a strong default; if robustness to noisy corruption is the priority, GMRES is safer; and if the goal is to study iterative behavior, Gauss-Seidel provides clear convergence traces.  
 
-Second, Gauss-Seidel and GMRES provide complementary iterative viewpoints. Gauss-Seidel exposes convergence behavior directly through residual traces, while GMRES offers a hybrid Krylov-based reference for the same noisy block systems. The updated reporting separates \emph{solve success} from \emph{full convergence}. That distinction matters most at zero noise, where Gauss-Seidel still reconstructs every block correctly but some runs terminate at the configured iteration ceiling before satisfying the strict stopping test.
-
-Third, the dense-versus-sparse comparison matters numerically even outside classical conditioning summaries. Two matrices can have similar condition numbers and still differ in residual propagation, convergence behavior, and runtime profile once the solver and noise process are fixed.
+This work is a numerical analysis study of matrix-based decryption workflows, not a security proof of modern cryptographic primitives. The conclusions should be read as guidance about numerical robustness, solver stability, and reconstruction quality rather than claims about cryptographic security.
 
 \section{Conclusion}
-This manuscript template is aligned to the Kodak-only benchmark configuration and the updated notebook outputs. It provides a numerical-robustness framing, references the exact 24 Kodak images used in the experiment, and includes direct hooks for solver-quality, runtime, and visual-reconstruction artifacts. Any future rerun of the notebook can update the paper by regenerating the tables and figures without editing the LaTeX prose.
+
+\clearpage
 
 \appendix
 \section{Source Pseudocode}
-The following appendix records the algorithmic pseudocode that guided the notebook implementation. The Gaussian Elimination, LU, and Gauss-Seidel listings are transcribed from the project pseudocode source with notation normalized for readability. The GMRES Hybrid listing follows the same source structure and preserves its two-phase organization, while the original hybrid method is attributed to Nachtigal, Reichel, and Trefethen \cite{nachtigal-gmres-1992}.
 
 \input{appendix_pseudocode.tex}
 
 \section{Complete Kodak Reconstruction Walls}
-The appendix includes the full set of generated walls so that the paper records every Kodak case rather than only one representative panel in the main text.
 
+\ifincludeappendixwalls
 \input{appendix_walls.tex}
+\else
+\paragraph{Appendix note} The full reconstruction walls and error maps are available in \texttt{appendix\_walls.tex}. Enable them by setting \texttt{\string\includeappendixwallstrue} in the preamble.
+\fi
 
-\bibliographystyle{plain}
-\bibliography{refs}
+\clearpage
+
+\FloatBarrier
+
+{\sloppy
+\begin{thebibliography}{99}
+\raggedright
+
+\bibitem{alghamdi-munir-2024}
+Alghamdi, Y., \& Munir, A. (2024). Image encryption algorithms: A survey of design and evaluation metrics. \textit{Journal of Cybersecurity and Privacy, 4}(1), 126--152. \url{https://doi.org/10.3390/jcp4010007}
+
+\bibitem{burden-faires-2015}
+Burden, R. L., \& Faires, J. D. (2015). \textit{Numerical analysis} (10th ed.). Cengage Learning.
+
+\bibitem{chapra-canale-2010}
+Chapra, S. C., \& Canale, R. P. (2010). \textit{Numerical methods for engineers} (6th ed.). McGraw-Hill.
+
+\bibitem{kodak-lossless}
+Eastman Kodak Company. (1999). \textit{Kodak lossless true color image suite}. \url{https://r0k.us/graphics/kodak/kodak/}
+
+\bibitem{frankel-1950}
+Frankel, S. P. (1950). Convergence rates of iterative treatments of partial differential equations. \textit{Mathematics of Computation, 4}, 65--75.
+
+\bibitem{golub-vanloan-2013}
+Golub, G. H., \& Van Loan, C. F. (2013). \textit{Matrix computations} (4th ed.). Johns Hopkins University Press.
+
+\bibitem{gonzalez-woods-2018}
+Gonzalez, R. C., \& Woods, R. E. (2018). \textit{Digital image processing} (4th ed.). Pearson.
+
+\bibitem{lu-notes}
+Kiruba, R. (2014). \textit{LU decomposition notes} (University of Cambridge supporting notes).
+\newline\url{https://www.cl.cam.ac.uk/teaching/1314/NumMethods/supporting/mcmaster-kiruba-ludecomp.pdf}
+
+\bibitem{nachtigal-gmres-1992}
+Nachtigal, N. M., Reichel, L., \& Trefethen, L. N. (1992). A hybrid GMRES algorithm for nonsymmetric linear systems. \textit{SIAM Journal on Matrix Analysis and Applications, 13}(3), 796--825. \url{https://doi.org/10.1137/0613050}
+
+\bibitem{noura-2017}
+Noura, H., Sleem, L., \& Couturier, R. (2017). \textit{A revision of a new chaos-based image encryption system: Weaknesses and limitations} (arXiv preprint). \url{https://arxiv.org/abs/1701.08371}
+
+\bibitem{saad-2003}
+Saad, Y. (2003). \textit{Iterative methods for sparse linear systems} (2nd ed.). Society for Industrial and Applied Mathematics.
+
+\bibitem{trefethen-bau-1997}
+Trefethen, L. N., \& Bau, D., III. (1997). \textit{Numerical linear algebra}. SIAM. \url{https://doi.org/10.1137/1.9780898719574}
+
+\bibitem{varga-1962}
+Varga, R. S. (1962). \textit{Matrix iterative analysis}. Prentice-Hall.
+
+\bibitem{young-1950}
+Young, D. M. (1950). \textit{Iterative methods for solving partial difference equations of elliptic type} (Doctoral dissertation, Harvard University).
+
+\end{thebibliography}
+}
 
 \end{document}
-
